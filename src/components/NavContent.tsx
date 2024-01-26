@@ -1,25 +1,13 @@
 import { Menu, X } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import Navigation from "./Navigation";
 import Logo from "./Logo";
 import { AnimatePresence, motion } from "framer-motion";
+import { useOutsideClick } from "../hooks/useOutsideClick";
 
 function NavLinks() {
   const [isOpen, setIsOpen] = useState(false);
-
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (ref.current && !ref.current.contains(event.target as Node)) {
-        setIsOpen(false);
-      }
-    }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [ref]);
+  const ref = useOutsideClick(() => setIsOpen(false));
 
   const toggleNavBar = () => {
     setIsOpen((isOpen) => !isOpen);
