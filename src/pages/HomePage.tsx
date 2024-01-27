@@ -8,8 +8,8 @@ function HomePage() {
   return (
     <>
       <div className="flex flex-wrap bg-gradient-to-r from-[#3023ae] to-[#c86dd7] text-white px-6">
-        <div className="flex flex-col justify-center px-6 py-12 md:w-1/2">
-          <h1 className="mb-10 text-3xl md:text-4xl xl:text-4xl">
+        <div className="flex flex-col justify-center py-12 pl-6 md:w-1/2">
+          <h1 className="mb-10 text-2xl md:text-3xl xl:text-4xl">
             Join the world's largest community of TV and movie fans
           </h1>
           <ul className="space-y-4 text-sm xl:space-y-6 xl:text-xl">
