@@ -5,9 +5,13 @@ import { useRef } from "react";
 
 function HomePage() {
   const LottieRef = useRef<LottieRefCurrentProps>(null);
+
+  LottieRef.current?.setSpeed(0.4);
+
   return (
     <>
-      <div className="flex flex-wrap bg-gradient-to-r from-[#3023ae] to-[#c86dd7] text-white px-6">
+      <div className="flex flex-wrap px-6 text-black bg-slate-50">
+        {/* <div className="flex flex-wrap bg-gradient-to-r from-[#3023ae] to-[#c86dd7] text-white px-6"> */}
         <div className="flex flex-col justify-center py-12 pl-6 md:w-1/2">
           <h1 className="mb-10 text-2xl md:text-3xl xl:text-4xl">
             Join the world's largest community of TV and movie fans
