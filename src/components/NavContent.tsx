@@ -15,7 +15,7 @@ function NavLinks() {
 
   return (
     <>
-      <div className="w-2/3">
+      <div className="w-3/5 xl:w-2/3">
         <div className="items-center flex-grow hidden gap-6 md:flex md:justify-between ">
           <Navigation />
         </div>

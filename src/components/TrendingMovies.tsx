@@ -1,6 +1,12 @@
 import { useQuery } from "react-query";
 import { getTrendingMovies } from "../services/themoviedbAPI";
-import { Carousel, CarouselContent, CarouselItem } from "./carousel";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "./carousel";
 import CarouselCard from "./CarouselCard";
 import type { MovieType } from "@/lib/types";
 
@@ -11,8 +17,10 @@ function TrendingMovies() {
   );
 
   return (
-    <section className="px-6">
-      <h2 className="mb-4 text-3xl font-bold md:text-4xl">Trending Movies</h2>
+    <section className="">
+      <h2 className="px-3 mb-5 text-3xl font-bold md:px-8 md:text-4xl">
+        Trending Movies
+      </h2>
       <Carousel
         opts={{
           loop: true,
@@ -26,6 +34,8 @@ function TrendingMovies() {
             </CarouselItem>
           ))}
         </CarouselContent>
+        <CarouselPrevious className="absolute left-0 h-full text-white border-none rounded-none md:w-20 w-14 top-1/2 bg-black/60 focus:bg-black/70 hover:bg-black/60 hover:text-white" />
+        <CarouselNext className="absolute right-0 h-full text-white border-none rounded-none md:w-20 w-14 top-1/2 bg-black/60 focus:bg-black/70 hover:bg-black/60 hover:text-white" />
       </Carousel>
     </section>
   );
