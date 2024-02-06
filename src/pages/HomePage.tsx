@@ -6,6 +6,8 @@ import Lottie, { LottieRefCurrentProps } from "lottie-react";
 import { Bell, CheckCircle2, Eye, Search } from "lucide-react";
 import TrendingMovies from "@/components/TrendingMovies";
 import TrendingShows from "@/components/TrendingShows";
+import NowPlayingMovies from "@/components/NowPlayingMovies";
+import AiringShows from "@/components/AiringShows";
 
 function HomePage() {
   const LottieRef = useRef<LottieRefCurrentProps>(null);
@@ -49,6 +51,8 @@ function HomePage() {
 
       <TrendingShows />
       <TrendingMovies />
+      <NowPlayingMovies />
+      <AiringShows />
     </>
   );
 }

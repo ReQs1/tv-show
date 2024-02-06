@@ -17,7 +17,7 @@ function TrendingMovies() {
   );
 
   return (
-    <section>
+    <section className="mb-16">
       <div className="px-6 mb-8 space-y-4 md:px-10">
         <h2 className="text-3xl font-bold md:text-4xl">Trending Movies</h2>
         <p className="text-stone-600">
