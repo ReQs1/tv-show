@@ -31,7 +31,7 @@ function TrendingMovies() {
           dragFree: true,
         }}
       >
-        <CarouselContent className="container -ml-5">
+        <CarouselContent className="-ml-5">
           {trendingMovies?.map((movie: MovieType) => (
             <CarouselItem key={movie.id} className="pl-5 basis-auto">
               <CarouselCard movie={movie} />

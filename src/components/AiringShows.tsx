@@ -26,7 +26,7 @@ function AiringShows() {
           dragFree: true,
         }}
       >
-        <CarouselContent className="container -ml-5">
+        <CarouselContent className="-ml-5">
           {airingShows?.map((movie: ShowType) => (
             <CarouselItem key={movie.id} className="pl-5 basis-auto">
               <CarouselCard movie={movie} />

@@ -57,3 +57,16 @@ export async function getAiringShows() {
     console.error(error);
   }
 }
+
+export async function getGenres(type: string) {
+  try {
+    const res = await fetch(
+      `https://api.themoviedb.org/3/genre/${type}/list?language=en-US`,
+      options
+    );
+    const data = await res.json();
+    return data.genres;
+  } catch (error) {
+    console.error(error);
+  }
+}

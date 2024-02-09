@@ -3,6 +3,7 @@ import NoPageFound from "./pages/NoPageFound";
 import AppLayout from "./components/AppLayout";
 import HomePage from "./pages/HomePage";
 import { QueryClient, QueryClientProvider } from "react-query";
+import GenrePage from "./pages/GenrePage";
 
 const queryClient = new QueryClient();
 
@@ -13,6 +14,7 @@ function App() {
         <Routes>
           <Route element={<AppLayout />}>
             <Route path="/" element={<HomePage />} />
+            <Route path="genres/:genreId" element={<GenrePage />} />
             <Route path="*" element={<NoPageFound />} />
           </Route>
         </Routes>

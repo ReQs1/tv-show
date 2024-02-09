@@ -8,13 +8,13 @@ function Navigation() {
       <SearchInput />
 
       <ul className="flex flex-col gap-6 text-xl md:gap-8 md:text-base md:flex-row xl:text-xl xl:gap-14">
-        <li className="transition-all hover:scale-125">
+        <li>
           <NavLink to="/shows">Shows</NavLink>
         </li>
-        <li className="transition-all hover:scale-125">
+        <li>
           <NavLink to="/movies">Movies</NavLink>
         </li>
-        <li className="transition-all hover:scale-125">
+        <li className="relative">
           <NavLink to="/genres">Genres</NavLink>
         </li>
       </ul>
