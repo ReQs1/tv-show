@@ -1,7 +1,4 @@
 import { useRef } from "react";
-import { useQuery } from "react-query";
-
-import { getGenres } from "@/services/themoviedbAPI";
 
 import animationData from "../assets/tv-show-animation.json";
 
@@ -11,19 +8,9 @@ import TrendingMovies from "@/components/TrendingMovies";
 import TrendingShows from "@/components/TrendingShows";
 import NowPlayingMovies from "@/components/NowPlayingMovies";
 import AiringShows from "@/components/AiringShows";
-import { Link } from "react-router-dom";
-
-type GenresType = {
-  id: number;
-  name: string;
-};
+import GenresList from "@/components/GenresList";
 
 function HomePage() {
-  const { data: movieGenres } = useQuery({
-    queryKey: "movieGenres",
-    queryFn: () => getGenres("movie"),
-  });
-
   const LottieRef = useRef<LottieRefCurrentProps>(null);
   LottieRef.current?.setSpeed(0.8);
 
@@ -67,20 +54,7 @@ function HomePage() {
       <NowPlayingMovies />
       <AiringShows />
 
-      <div className="flex flex-col items-center py-6 md:px-6 md:py-10 bg-gray-50 mt-28 2xl:px-80">
-        <h2 className="text-3xl font-semibold">Movies Genres</h2>
-        <div className="flex flex-wrap justify-center gap-4 mt-12 lg:gap-6">
-          {movieGenres?.map((genre: GenresType) => (
-            <Link
-              to={`genres/${genre.id}?view=movie`}
-              key={genre.id}
-              className="px-4 py-2 text-white transition-all bg-yellow-400 rounded-full cursor-pointer hover:bg-yellow-500"
-            >
-              {genre.name}
-            </Link>
-          ))}
-        </div>
-      </div>
+      <GenresList />
     </>
   );
 }
