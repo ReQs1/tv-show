@@ -1,3 +1,5 @@
+import { GenresType } from "@/lib/types";
+
 const options = {
   method: "GET",
   headers: {
@@ -66,6 +68,25 @@ export async function getGenres(type: string) {
     );
     const data = await res.json();
     return data.genres;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function getGenreById(id: string, type: string) {
+  try {
+    const res = await fetch(
+      `https://api.themoviedb.org/3/genre/${type}/list?language=en-US`,
+      options
+    );
+
+    const data = await res.json();
+
+    const genre = data.genres.find((obj: GenresType) => {
+      return String(obj.id) === id;
+    });
+
+    return genre;
   } catch (error) {
     console.error(error);
   }

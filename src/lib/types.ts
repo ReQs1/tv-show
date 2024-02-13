@@ -36,3 +36,9 @@ export type ShowType = {
   vote_average: number;
   vote_count: number;
 };
+
+export type GenresType = {
+  id: number;
+  name: string;
+  type?: string;
+};

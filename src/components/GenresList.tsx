@@ -1,32 +1,27 @@
+import { type GenresType } from "@/lib/types";
 import { useQuery } from "react-query";
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 import { getGenres } from "@/services/themoviedbAPI";
 
-import { Link } from "react-router-dom";
+import { mergeGenres } from "@/lib/utils";
 
-type GenresType = {
-  id: number;
-  name: string;
-  type: string;
+const variants = {
+  initial: {
+    opacity: 0,
+    x: -100,
+  },
+  animate: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.5,
+    },
+  },
 };
 
-const mergeGenres = (
-  movieGenres: GenresType[] | undefined,
-  tvShowGenres: GenresType[] | undefined
-) => {
-  if (!movieGenres || !tvShowGenres) return [];
-
-  const mergedGenres = [
-    ...movieGenres.map((genre) => ({ ...genre, type: "movie" })),
-    ...tvShowGenres
-      .map((genre) => ({ ...genre, type: "tv" }))
-      .filter(
-        (tvGenre) =>
-          !movieGenres.find((movieGenre) => movieGenre.name === tvGenre.name)
-      ),
-  ];
-  return mergedGenres;
-};
+const MotionLink = motion(Link);
 
 function GenresList() {
   const { data: movieGenres } = useQuery({
@@ -39,21 +34,33 @@ function GenresList() {
   });
 
   const mergedGenres = mergeGenres(movieGenres, tvShowGenres);
-  console.log(mergedGenres);
   return (
     <div className="flex flex-col items-center py-6 md:px-6 md:py-10 bg-gray-50 mt-28 2xl:px-80">
       <h2 className="text-3xl font-semibold">Genres</h2>
-      <div className="flex flex-wrap justify-center gap-4 mt-12 lg:gap-6">
+      <motion.div
+        animate={{
+          transition: {
+            staggerChildren: 0.05,
+          },
+        }}
+        className="flex flex-wrap justify-center gap-4 mt-12 lg:gap-6"
+      >
         {mergedGenres?.map((genre: GenresType) => (
-          <Link
+          <MotionLink
             to={`genres/${genre.id}?view=${genre.type}`}
             key={genre.id}
-            className="px-4 py-2 text-white transition-all bg-yellow-400 rounded-full cursor-pointer hover:bg-yellow-500"
+            className="px-4 py-2 text-white transition-colors bg-yellow-400 rounded-full cursor-pointer hover:bg-yellow-500"
+            variants={variants}
+            initial="initial"
+            whileInView="animate"
+            viewport={{
+              once: true,
+            }}
           >
             {genre.name}
-          </Link>
+          </MotionLink>
         ))}
-      </div>
+      </motion.div>
     </div>
   );
 }
