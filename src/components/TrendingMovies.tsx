@@ -28,7 +28,8 @@ function TrendingMovies() {
         opts={{
           loop: false,
           align: "start",
-          dragFree: true,
+          // dragFree: true,
+          skipSnaps: true,
         }}
       >
         <CarouselContent className="-ml-5">
