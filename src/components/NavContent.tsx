@@ -31,16 +31,16 @@ function NavLinks() {
         {isOpen && (
           <motion.div
             className="absolute top-0 left-0 flex flex-col items-center w-screen gap-10 py-12 bg-yellow-300 md:hidden"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            initial={{ y: -200, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ opacity: 0, y: -200 }}
             ref={ref}
           >
             <button
-              className="absolute right-4 top-4"
+              className="absolute right-4 top-6"
               onClick={() => setIsOpen(false)}
             >
-              <X size={28} />
+              <X size={36} />
             </button>
             <Logo />
             <Navigation />
