@@ -23,7 +23,7 @@ function TrendingShows() {
       </div>
       <Carousel
         opts={{
-          loop: true,
+          loop: false,
           align: "start",
           dragFree: true,
         }}
@@ -35,8 +35,8 @@ function TrendingShows() {
             </CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselPrevious className="absolute left-0 w-10 h-full text-white border-none rounded-none md:w-20 top-1/2 bg-black/60 focus:bg-black/70 hover:bg-black/60 hover:text-white" />
-        <CarouselNext className="absolute right-0 w-10 h-full text-white border-none rounded-none md:w-20 top-1/2 bg-black/60 focus:bg-black/70 hover:bg-black/60 hover:text-white" />
+        <CarouselPrevious className="absolute left-0 hidden w-10 h-full text-white border-none rounded-none md:block md:w-20 top-1/2 bg-black/60 focus:bg-black/70 hover:bg-black/60 hover:text-white" />
+        <CarouselNext className="absolute right-0 hidden w-10 h-full text-white border-none rounded-none md:block md:w-20 top-1/2 bg-black/60 focus:bg-black/70 hover:bg-black/60 hover:text-white" />
       </Carousel>
     </section>
   );
