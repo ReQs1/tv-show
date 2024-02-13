@@ -9,9 +9,8 @@ import {
   CarouselPrevious,
 } from "./carousel";
 import CarouselCard from "./CarouselCard";
-import { memo } from "react";
 
-const TrendingMovies = memo(function TrendingMovies() {
+function TrendingMovies() {
   const { data: trendingMovies } = useQuery(
     "trendingMovies",
     getTrendingMovies
@@ -44,6 +43,6 @@ const TrendingMovies = memo(function TrendingMovies() {
       </Carousel>
     </section>
   );
-});
+}
 
 export default TrendingMovies;

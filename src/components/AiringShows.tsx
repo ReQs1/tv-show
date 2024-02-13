@@ -9,9 +9,8 @@ import {
 } from "./carousel";
 import { ShowType } from "@/lib/types";
 import { getAiringShows } from "@/services/themoviedbAPI";
-import { memo } from "react";
 
-const AiringShows = memo(function AiringShows() {
+function AiringShows() {
   const { data: airingShows } = useQuery("airingShows", getAiringShows);
 
   return (
@@ -39,6 +38,6 @@ const AiringShows = memo(function AiringShows() {
       </Carousel>
     </section>
   );
-});
+}
 
 export default AiringShows;

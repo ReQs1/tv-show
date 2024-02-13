@@ -9,9 +9,8 @@ import {
 } from "./carousel";
 import CarouselCard from "./CarouselCard";
 import type { ShowType } from "@/lib/types";
-import { memo } from "react";
 
-const TrendingShows = memo(function TrendingShows() {
+function TrendingShows() {
   const { data: trendingShows } = useQuery("trendingShows", getTrendingShows);
 
   return (
@@ -41,6 +40,6 @@ const TrendingShows = memo(function TrendingShows() {
       </Carousel>
     </section>
   );
-});
+}
 
 export default TrendingShows;

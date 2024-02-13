@@ -11,9 +11,8 @@ import {
   CarouselPrevious,
 } from "./carousel";
 import { MovieType } from "@/lib/types";
-import { memo } from "react";
 
-const NowPlayingMovies = memo(function NowPlayingMovies() {
+function NowPlayingMovies() {
   const { data: nowPlayingMovies } = useQuery(
     "nowPlaying",
     getNowPlayingMovies
@@ -44,6 +43,6 @@ const NowPlayingMovies = memo(function NowPlayingMovies() {
       </Carousel>
     </section>
   );
-});
+}
 
 export default NowPlayingMovies;
