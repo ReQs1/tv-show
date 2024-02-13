@@ -11,8 +11,9 @@ import {
   CarouselPrevious,
 } from "./carousel";
 import { MovieType } from "@/lib/types";
+import { memo } from "react";
 
-function NowPlayingMovies() {
+const NowPlayingMovies = memo(function NowPlayingMovies() {
   const { data: nowPlayingMovies } = useQuery(
     "nowPlaying",
     getNowPlayingMovies
@@ -28,8 +29,7 @@ function NowPlayingMovies() {
         opts={{
           loop: false,
           align: "start",
-          // dragFree: true,
-          skipSnaps: true,
+          dragFree: true,
         }}
       >
         <CarouselContent className="-ml-5">
@@ -44,6 +44,6 @@ function NowPlayingMovies() {
       </Carousel>
     </section>
   );
-}
+});
 
 export default NowPlayingMovies;

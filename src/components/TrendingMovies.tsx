@@ -9,8 +9,9 @@ import {
   CarouselPrevious,
 } from "./carousel";
 import CarouselCard from "./CarouselCard";
+import { memo } from "react";
 
-function TrendingMovies() {
+const TrendingMovies = memo(function TrendingMovies() {
   const { data: trendingMovies } = useQuery(
     "trendingMovies",
     getTrendingMovies
@@ -28,8 +29,7 @@ function TrendingMovies() {
         opts={{
           loop: false,
           align: "start",
-          // dragFree: true,
-          skipSnaps: true,
+          dragFree: true,
         }}
       >
         <CarouselContent className="-ml-5">
@@ -44,6 +44,6 @@ function TrendingMovies() {
       </Carousel>
     </section>
   );
-}
+});
 
 export default TrendingMovies;

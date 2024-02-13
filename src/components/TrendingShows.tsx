@@ -9,8 +9,9 @@ import {
 } from "./carousel";
 import CarouselCard from "./CarouselCard";
 import type { ShowType } from "@/lib/types";
+import { memo } from "react";
 
-function TrendingShows() {
+const TrendingShows = memo(function TrendingShows() {
   const { data: trendingShows } = useQuery("trendingShows", getTrendingShows);
 
   return (
@@ -25,8 +26,7 @@ function TrendingShows() {
         opts={{
           loop: false,
           align: "start",
-          // dragFree: true,
-          skipSnaps: true,
+          dragFree: true,
         }}
       >
         <CarouselContent className="-ml-5">
@@ -41,6 +41,6 @@ function TrendingShows() {
       </Carousel>
     </section>
   );
-}
+});
 
 export default TrendingShows;

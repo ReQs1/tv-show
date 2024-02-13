@@ -9,8 +9,9 @@ import {
 } from "./carousel";
 import { ShowType } from "@/lib/types";
 import { getAiringShows } from "@/services/themoviedbAPI";
+import { memo } from "react";
 
-function AiringShows() {
+const AiringShows = memo(function AiringShows() {
   const { data: airingShows } = useQuery("airingShows", getAiringShows);
 
   return (
@@ -23,8 +24,7 @@ function AiringShows() {
         opts={{
           loop: false,
           align: "start",
-          // dragFree: true,
-          skipSnaps: true,
+          dragFree: true,
         }}
       >
         <CarouselContent className="-ml-5">
@@ -39,6 +39,6 @@ function AiringShows() {
       </Carousel>
     </section>
   );
-}
+});
 
 export default AiringShows;
