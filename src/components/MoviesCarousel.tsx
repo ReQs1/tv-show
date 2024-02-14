@@ -1,5 +1,3 @@
-import { useQuery } from "react-query";
-import CarouselCard from "./CarouselCard";
 import {
   Carousel,
   CarouselContent,
@@ -7,17 +5,21 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "./carousel";
-import { ShowType } from "@/lib/types";
-import { getAiringShows } from "@/services/themoviedbAPI";
+import CarouselCard from "./CarouselCard";
+import { type MovieType } from "@/lib/types";
 
-function AiringShows() {
-  const { data: airingShows } = useQuery("airingShows", getAiringShows);
+type MoviesCarouselProps = {
+  data: MovieType[];
+  title: string;
+  description: string;
+};
 
+function MoviesCarousel({ data, title, description }: MoviesCarouselProps) {
   return (
     <section className="mb-16">
       <div className="px-6 mb-8 space-y-4 md:px-10">
-        <h2 className="text-3xl font-bold md:text-4xl">Airing Today</h2>
-        <p className="text-stone-600">TV shows airing today</p>
+        <h2 className="text-3xl font-bold md:text-4xl">{title}</h2>
+        <p className="text-stone-600">{description}</p>
       </div>
       <Carousel
         opts={{
@@ -27,7 +29,7 @@ function AiringShows() {
         }}
       >
         <CarouselContent className="-ml-5">
-          {airingShows?.map((movie: ShowType) => (
+          {data?.map((movie: MovieType) => (
             <CarouselItem key={movie.id} className="pl-5 basis-auto">
               <CarouselCard movie={movie} />
             </CarouselItem>
@@ -40,4 +42,4 @@ function AiringShows() {
   );
 }
 
-export default AiringShows;
+export default MoviesCarousel;

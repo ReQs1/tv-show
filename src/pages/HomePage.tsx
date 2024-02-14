@@ -1,16 +1,33 @@
 import { useRef } from "react";
+import { useQuery } from "react-query";
+
+import {
+  getAiringShows,
+  getNowPlayingMovies,
+  getTrendingMovies,
+  getTrendingShows,
+} from "@/services/themoviedbAPI";
 
 import animationData from "../assets/tv-show-animation.json";
 
 import Lottie, { LottieRefCurrentProps } from "lottie-react";
 import { Bell, CheckCircle2, Eye, Search } from "lucide-react";
-import TrendingMovies from "@/components/TrendingMovies";
-import TrendingShows from "@/components/TrendingShows";
-import NowPlayingMovies from "@/components/NowPlayingMovies";
-import AiringShows from "@/components/AiringShows";
+
 import GenresList from "@/components/GenresList";
+import MoviesCarousel from "@/components/MoviesCarousel";
 
 function HomePage() {
+  const { data: trendingShows } = useQuery("trendingShows", getTrendingShows);
+  const { data: trendingMovies } = useQuery(
+    "trendingMovies",
+    getTrendingMovies
+  );
+  const { data: nowPlayingMovies } = useQuery(
+    "nowPlaying",
+    getNowPlayingMovies
+  );
+  const { data: airingShows } = useQuery("airingShows", getAiringShows);
+
   const LottieRef = useRef<LottieRefCurrentProps>(null);
   LottieRef.current?.setSpeed(0.8);
 
@@ -49,10 +66,29 @@ function HomePage() {
         </div>
       </div>
 
-      <TrendingShows />
-      <TrendingMovies />
-      <NowPlayingMovies />
-      <AiringShows />
+      <MoviesCarousel
+        data={trendingShows}
+        title="Trending Shows"
+        description="Shows with most reactions in the last 3 days"
+      />
+
+      <MoviesCarousel
+        data={trendingMovies}
+        title="Trending Movies"
+        description="Movies with most reactions in the last 3 days"
+      />
+
+      <MoviesCarousel
+        data={nowPlayingMovies}
+        title="Now Playing Movies"
+        description="Movies that are currently in theatres"
+      />
+
+      <MoviesCarousel
+        data={airingShows}
+        title="Airing Today"
+        description="TV shows airing today"
+      />
 
       <GenresList />
     </>
