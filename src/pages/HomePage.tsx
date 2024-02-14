@@ -18,14 +18,17 @@ import MoviesCarousel from "@/components/MoviesCarousel";
 
 function HomePage() {
   const { data: trendingShows } = useQuery("trendingShows", getTrendingShows);
+
   const { data: trendingMovies } = useQuery(
     "trendingMovies",
     getTrendingMovies
   );
+
   const { data: nowPlayingMovies } = useQuery(
     "nowPlaying",
     getNowPlayingMovies
   );
+
   const { data: airingShows } = useQuery("airingShows", getAiringShows);
 
   const LottieRef = useRef<LottieRefCurrentProps>(null);

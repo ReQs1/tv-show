@@ -5,17 +5,13 @@ import Footer from "./Footer";
 function AppLayout() {
   return (
     <>
-      <header>
-        <Navbar />
-      </header>
+      <Navbar />
 
       <main className="flex-1">
         <Outlet />
       </main>
 
-      <footer>
-        <Footer />
-      </footer>
+      <Footer />
     </>
   );
 }
