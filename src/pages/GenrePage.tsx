@@ -5,6 +5,7 @@ import { useInView } from "react-intersection-observer";
 import { getGenreById, getGenreMovies } from "@/services/themoviedbAPI";
 import { MovieType, ShowType } from "@/lib/types";
 import { useEffect } from "react";
+import { cn } from "@/lib/utils";
 
 function GenrePage() {
   const { ref, inView } = useInView();
@@ -56,25 +57,27 @@ function GenrePage() {
         <div className="space-x-4 md:space-x-8">
           <Link
             to={`?view=tv`}
-            className={`cursor-pointer ${
-              type === "tv" ? "border-b-2" : ""
-            } border-yellow-400 text-lg font-semibold ${
-              genreTv?.results?.length === 0
-                ? "pointer-events-none text-stone-400"
-                : ""
-            }`}
+            className={cn(
+              "cursor-pointer border-yellow-400 text-lg font-semibold",
+              {
+                ["border-b-2"]: type === "tv",
+                ["pointer-events-none text-stone-400"]:
+                  genreTv?.results?.length === 0,
+              },
+            )}
           >
             Shows
           </Link>
           <Link
             to={`?view=movie`}
-            className={`cursor-pointer ${
-              type === "movie" ? "border-b-2" : ""
-            } border-yellow-400 text-lg font-semibold ${
-              genreMovies?.results?.length === 0
-                ? "pointer-events-none text-stone-400"
-                : ""
-            }`}
+            className={cn(
+              "cursor-pointer border-yellow-400 text-lg font-semibold",
+              {
+                ["border-b-2"]: type === "movie",
+                ["pointer-events-none text-stone-400"]:
+                  genreMovies?.results?.length === 0,
+              },
+            )}
           >
             Movies
           </Link>
@@ -93,7 +96,8 @@ function GenrePage() {
                       key={i}
                       className="flex items-end w-40 p-3 bg-center bg-no-repeat bg-cover rounded-lg cursor-pointer h-52 md:h-64 md:w-52 bg-gradient-to-b from-transparent to-black"
                       style={{
-                        backgroundImage: `linear-gradient(rgba(255,255,255,0) 0%, rgba(0,0,0,0.8) 85%), url('https://image.tmdb.org/t/p/original${movie.poster_path}')`,
+                        backgroundImage:
+                          `linear-gradient(rgba(255,255,255,0) 0%, rgba(0,0,0,0.8) 85%), url('https://image.tmdb.org/t/p/original${movie.poster_path}')`,
                       }}
                     >
                       <h3 className="text-lg font-bold text-white">
@@ -107,7 +111,8 @@ function GenrePage() {
                     key={i}
                     className="flex items-end w-40 p-3 bg-center bg-no-repeat bg-cover rounded-lg cursor-pointer h-52 md:h-64 md:w-52 bg-gradient-to-b from-transparent to-black"
                     style={{
-                      backgroundImage: `linear-gradient(rgba(255,255,255,0) 0%, rgba(0,0,0,0.8) 85%), url('https://image.tmdb.org/t/p/original${movie.poster_path}')`,
+                      backgroundImage:
+                        `linear-gradient(rgba(255,255,255,0) 0%, rgba(0,0,0,0.8) 85%), url('https://image.tmdb.org/t/p/original${movie.poster_path}')`,
                     }}
                   >
                     <h3 className="text-lg font-bold text-white">
@@ -120,7 +125,7 @@ function GenrePage() {
         </div>
         {isFetchingNextPage && (
           <div className="flex justify-center my-8">
-            <div className="w-6 h-6 border-t-2 border-b-2 border-yellow-500 rounded-full animate-spin"></div>
+            <div className="w-6 h-6 border-t-2 border-b-2 border-yellow-500 rounded-full animate-spin" />
           </div>
         )}
         {!hasNextPage && (
