@@ -17,7 +17,7 @@ type MoviesCarouselProps = {
 function MoviesCarousel({ data, title, description }: MoviesCarouselProps) {
   return (
     <section className="mb-16">
-      <div className="px-6 mb-8 space-y-4 md:px-10">
+      <div className="px-4 mb-8 space-y-4 md:px-10">
         <h2 className="text-3xl font-bold md:text-4xl">{title}</h2>
         <p className="text-stone-600">{description}</p>
       </div>

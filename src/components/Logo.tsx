@@ -27,6 +27,7 @@ function Logo() {
           }
         ></path>
       </svg>
+      <span className="sr-only">HomePage</span>
     </NavLink>
   );
 }

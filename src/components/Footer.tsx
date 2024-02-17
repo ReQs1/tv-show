@@ -3,11 +3,11 @@ import { Facebook, Instagram, Twitter } from "lucide-react";
 function Footer() {
   return (
     <footer>
-      <div className="flex items-start justify-center gap-10 px-3 py-10 text-sm text-white bg-black sm:px-12 xl:px-20 ">
-        <div className="flex-1 hidden text-center md:flex md:justify-start lg:h-[250px] md:h-[200px] md:items-center">
+      <div className="flex items-start justify-center gap-5 py-10 pl-3 text-sm text-white bg-black sm:px-12 xl:px-20 ">
+        <div className="flex-1 hidden md:flex md:justify-start lg:h-[250px] md:h-[200px] md:items-center">
           <svg
-            width="80"
-            height="80"
+            width="100"
+            height="100"
             viewBox="0 0 80 80"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -88,10 +88,10 @@ function Footer() {
         </div>
 
         <div className="flex-1">
-          <h5 className="mb-4 text-yellow-400 uppercase text-s lg:text-base md:mb-6">
+          <h5 className="mb-4 text-sm text-yellow-400 uppercase md:text-base md:mb-6">
             Company
           </h5>
-          <ul className="space-y-5 text-base font-semibold lg:text-lg lg:space-y-6">
+          <ul className="space-y-5 text-sm font-semibold md:text-lg lg:space-y-6">
             <li className="cursor-pointer">About</li>
             <li className="cursor-pointer">Articles</li>
             <li className="cursor-pointer">Careers</li>
@@ -101,28 +101,28 @@ function Footer() {
         </div>
 
         <div className="flex-1">
-          <h5 className="mb-4 text-yellow-400 uppercase text-s lg:text-base md:mb-6">
+          <h5 className="mb-4 text-sm text-yellow-400 uppercase md:text-base md:mb-6">
             Useful Links
           </h5>
-          <ul className="space-y-5 text-base font-semibold lg:text-lg lg:space-y-6">
+          <ul className="space-y-5 text-sm font-semibold md:text-lg lg:space-y-6">
             <li className="cursor-pointer">Support</li>
             <li className="cursor-pointer">Contact</li>
           </ul>
         </div>
 
-        <div className="flex flex-col items-start flex-1">
-          <h5 className="mb-4 text-yellow-400 uppercase text-s lg:text-base md:mb-6">
+        <div className="flex flex-col items-center flex-1 sm:items-start">
+          <h5 className="mb-4 text-sm text-yellow-400 uppercase md:text-base md:mb-6">
             Follow Us
           </h5>
-          <ul className="flex flex-col items-center gap-5 text-base font-semibold md:flex-row md:gap-8">
+          <ul className="flex flex-col items-center gap-5 text-sm font-semibold md:flex-row md:gap-8">
             <li className="cursor-pointer">
-              <Facebook className="lg:size-10" />
+              <Facebook className="md:size-8" />
             </li>
             <li className="cursor-pointer">
-              <Twitter className="lg:size-10" />
+              <Twitter className="md:size-8" />
             </li>
             <li className="cursor-pointer">
-              <Instagram className="lg:size-10" />
+              <Instagram className="md:size-8" />
             </li>
           </ul>
         </div>

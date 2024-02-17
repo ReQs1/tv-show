@@ -91,3 +91,16 @@ export async function getGenreById(id: string, type: string) {
     console.error(error);
   }
 }
+
+export async function getGenreMovies(id: string, type: string, page: number) {
+  try {
+    const res = await fetch(
+      `https://api.themoviedb.org/3/discover/${type}?include_adult=false&include_video=false&language=en-US&page=${page}&sort_by=popularity.desc&with_genres=${id}`,
+      options
+    );
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+}
