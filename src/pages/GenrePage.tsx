@@ -15,6 +15,7 @@ function GenrePage() {
   const { data: genre } = useQuery({
     queryKey: "genres",
     queryFn: () => getGenreById(genreId, type),
+    staleTime: Infinity,
   });
 
   const { data: genreMovies } = useQuery({
@@ -25,9 +26,8 @@ function GenrePage() {
   const { data: genreTv } = useQuery({
     queryKey: ["genreTv"],
     queryFn: () => getGenreMovies(genreId, "tv", 1),
+    staleTime: Infinity,
   });
-
-  console.log(genreMovies, genreTv);
 
   const { data, isSuccess, hasNextPage, fetchNextPage, isFetchingNextPage } =
     useInfiniteQuery({
@@ -95,7 +95,6 @@ function GenrePage() {
                       style={{
                         backgroundImage: `linear-gradient(rgba(255,255,255,0) 0%, rgba(0,0,0,0.8) 85%), url('https://image.tmdb.org/t/p/original${movie.poster_path}')`,
                       }}
-                      onClick={() => console.log(movie)}
                     >
                       <h3 className="text-lg font-bold text-white">
                         {movie.title || ("name" in movie ? movie.name : "")}
@@ -110,7 +109,6 @@ function GenrePage() {
                     style={{
                       backgroundImage: `linear-gradient(rgba(255,255,255,0) 0%, rgba(0,0,0,0.8) 85%), url('https://image.tmdb.org/t/p/original${movie.poster_path}')`,
                     }}
-                    onClick={() => console.log(movie)}
                   >
                     <h3 className="text-lg font-bold text-white">
                       {movie.title || ("name" in movie ? movie.name : "")}
