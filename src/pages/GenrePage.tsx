@@ -2,11 +2,13 @@ import { useEffect } from "react";
 import { useInfiniteQuery, useQuery } from "react-query";
 import { Link, useParams, useSearchParams } from "react-router-dom";
 
-import CarouselCard from "@/components/Card";
+import Card from "@/components/Card";
+import { Skeleton } from "@/components/skeleton";
 
 import { getGenreById, getGenreMovies } from "@/services/themoviedbAPI";
 import { MovieType, ShowType } from "@/lib/types";
 import { cn } from "@/lib/utils";
+import ScrollToTopBtn from "@/components/ScrollToTopBtn";
 
 function GenrePage() {
   const [searchParams] = useSearchParams();
@@ -30,17 +32,23 @@ function GenrePage() {
     staleTime: Infinity,
   });
 
-  const { data, isSuccess, hasNextPage, fetchNextPage, isFetchingNextPage } =
-    useInfiniteQuery({
-      queryKey: ["genre", genreId, type],
-      queryFn: ({ pageParam = 1 }) => getGenreMovies(genreId, type, pageParam),
-      getNextPageParam: (lastPage) => {
-        if (lastPage.page < lastPage.total_pages) {
-          return lastPage.page + 1;
-        }
-        return undefined;
-      },
-    });
+  const {
+    data,
+    isLoading,
+    isSuccess,
+    hasNextPage,
+    isFetchingNextPage,
+    fetchNextPage,
+  } = useInfiniteQuery({
+    queryKey: ["genre", genreId, type],
+    queryFn: ({ pageParam = 1 }) => getGenreMovies(genreId, type, pageParam),
+    getNextPageParam: (lastPage) => {
+      if (lastPage.page < lastPage.total_pages) {
+        return lastPage.page + 1;
+      }
+      return undefined;
+    },
+  });
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -86,12 +94,20 @@ function GenrePage() {
       {/* */}
       <section>
         <div className="flex flex-wrap gap-6">
+          {isLoading &&
+            Array(15)
+              .fill(0)
+              .map(() => <Skeleton className="w-40 h-52 md:w-52 md:h-64" />)}
           {isSuccess &&
             data?.pages.map((page) =>
               page.results.map((movie: MovieType | ShowType, i: number) => (
-                <CarouselCard key={i} movie={movie} />
+                <Card key={i} movie={movie} />
               ))
             )}
+          {isFetchingNextPage &&
+            Array(15)
+              .fill(0)
+              .map(() => <Skeleton className="w-40 h-52 md:w-52 md:h-64" />)}
         </div>
         {isSuccess && hasNextPage && (
           <div className="my-10 text-center">
@@ -114,6 +130,7 @@ function GenrePage() {
           </div>
         )}
       </section>
+      <ScrollToTopBtn />
     </div>
   );
 }
