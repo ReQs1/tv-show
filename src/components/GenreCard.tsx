@@ -4,14 +4,15 @@ import { Link, useSearchParams } from "react-router-dom";
 
 type GenreCardProps = {
   movie: ShowType | MovieType;
+  lastRef?: (node: HTMLDivElement | null) => void;
 };
 
-function GenreCard({ movie }: GenreCardProps) {
+function GenreCard({ movie, lastRef }: GenreCardProps) {
   const [searchParams] = useSearchParams();
   const type = searchParams.get("view");
 
   return (
-    <div className="w-56 lg:w-48">
+    <div className="flex flex-col flex-1 basis-52" ref={lastRef}>
       <Link to={`/${type}/${movie.id}`}>
         <img
           loading="lazy"
@@ -20,7 +21,7 @@ function GenreCard({ movie }: GenreCardProps) {
           alt={movie.title || ("name" in movie ? movie.name : "")}
         />
       </Link>
-      <div className="space-y-2">
+      <div className="flex flex-col justify-between flex-1 gap-2">
         <h3 className="mt-3 text-lg font-semibold">
           {truncate(movie.title) ||
             ("name" in movie ? truncate(movie.name) : "")}

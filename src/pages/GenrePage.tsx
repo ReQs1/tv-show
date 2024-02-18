@@ -9,8 +9,10 @@ import { MovieType, ShowType } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import ScrollToTopBtn from "@/components/ScrollToTopBtn";
 import GenreCard from "@/components/GenreCard";
+import { useInView } from "react-intersection-observer";
 
 function GenrePage() {
+  const { ref, inView } = useInView();
   const [searchParams] = useSearchParams();
   const { genreId = "" } = useParams();
   const type = searchParams.get("view") || "";
@@ -53,6 +55,12 @@ function GenrePage() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  useEffect(() => {
+    if (inView && hasNextPage) {
+      fetchNextPage();
+    }
+  }, [inView, hasNextPage, fetchNextPage]);
 
   return (
     <div className="px-6 my-12 md:px-20 md:my-20">
@@ -97,9 +105,9 @@ function GenrePage() {
           {isLoading &&
             Array(15)
               .fill(0)
-              .map(() => {
+              .map((_, i) => {
                 return (
-                  <div className="w-48 space-y-2">
+                  <div className="w-48 space-y-2" key={i}>
                     <Skeleton className="md:h-[288px] md:w-[100%]" />
                     <Skeleton className="md:h-[30px] md:w-[100%]" />
                   </div>
@@ -107,32 +115,28 @@ function GenrePage() {
               })}
           {isSuccess &&
             data?.pages.map((page) =>
-              page.results.map((movie: MovieType | ShowType, i: number) => (
-                <GenreCard key={i} movie={movie} />
-              ))
+              page.results.map((movie: MovieType | ShowType, i: number) => {
+                if (i + 1 === page.results.length) {
+                  return (
+                    <GenreCard lastRef={ref} movie={movie} key={movie.id} />
+                  );
+                }
+                return <GenreCard movie={movie} key={movie.id} />;
+              })
             )}
           {isFetchingNextPage &&
             Array(15)
               .fill(0)
-              .map(() => {
+              .map((_, i) => {
                 return (
-                  <div className="w-48 space-y-4">
+                  <div className="w-48 space-y-4" key={i}>
                     <Skeleton className="md:h-[288px] md:w-[100%]" />
                     <Skeleton className="md:h-[30px] md:w-[100%]" />
                   </div>
                 );
               })}
         </div>
-        {isSuccess && hasNextPage && (
-          <div className="my-10 text-center">
-            <button
-              className="px-6 py-3 text-xl text-white bg-yellow-400 rounded-lg hover:bg-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2 focus:ring-offset-stone-100"
-              onClick={() => fetchNextPage()}
-            >
-              Show more
-            </button>
-          </div>
-        )}
+
         {isSuccess && !hasNextPage && (
           <div className="flex justify-center my-8">
             <p className="text-lg font-semibold">No more movies to show</p>

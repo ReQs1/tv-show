@@ -23,7 +23,7 @@ function MoviesCarousel({ data, title, description }: MoviesCarouselProps) {
       </div>
       <Carousel
         opts={{
-          loop: false,
+          loop: true,
           align: "start",
           dragFree: true,
         }}
