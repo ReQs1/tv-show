@@ -1,0 +1,39 @@
+import { MovieType, ShowType } from "@/lib/types";
+import { truncate } from "@/lib/utils";
+import { Link, useSearchParams } from "react-router-dom";
+
+type GenreCardProps = {
+  movie: ShowType | MovieType;
+};
+
+function GenreCard({ movie }: GenreCardProps) {
+  const [searchParams] = useSearchParams();
+  const type = searchParams.get("view");
+
+  return (
+    <div className="w-56 lg:w-48">
+      <Link to={`/${type}/${movie.id}`}>
+        <img
+          loading="lazy"
+          className="rounded-lg md:h-[288px] w-full"
+          src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+          alt={movie.title || ("name" in movie ? movie.name : "")}
+        />
+      </Link>
+      <div className="space-y-2">
+        <h3 className="mt-3 text-lg font-semibold">
+          {truncate(movie.title) ||
+            ("name" in movie ? truncate(movie.name) : "")}
+        </h3>
+        <p>
+          {movie.release_date?.slice(0, 4) ||
+            ("first_air_date" in movie
+              ? movie.first_air_date?.slice(0, 4)
+              : "")}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+export default GenreCard;

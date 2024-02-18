@@ -33,9 +33,9 @@ function NavLinks() {
           <motion.div
             className="absolute top-0 left-0 flex flex-col items-center w-screen gap-10 py-12 bg-yellow-400 md:hidden"
             transition={{ duration: 0.3 }}
-            initial={{ y: -200, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ opacity: 0, y: -200 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
             ref={ref}
           >
             <button

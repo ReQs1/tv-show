@@ -5,7 +5,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "./carousel";
-import Card from "./Card";
+import CarouselCard from "./CarouselCard";
 import type { ShowType, MovieType } from "@/lib/types";
 
 type MoviesCarouselProps = {
@@ -31,7 +31,7 @@ function MoviesCarousel({ data, title, description }: MoviesCarouselProps) {
         <CarouselContent className="-ml-4">
           {data?.map((movie: MovieType | ShowType) => (
             <CarouselItem key={movie.id} className="pl-4 basis-auto">
-              <Card movie={movie} />
+              <CarouselCard movie={movie} />
             </CarouselItem>
           ))}
         </CarouselContent>
