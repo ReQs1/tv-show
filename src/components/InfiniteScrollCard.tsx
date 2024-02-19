@@ -16,7 +16,7 @@ function InfiniteScrollCard({ movie, lastRef }: CardProps) {
       <Link to={`/${type}/${movie.id}`}>
         <img
           loading="lazy"
-          className="rounded-lg md:h-[288px] w-full object-cover"
+          className="rounded-lg md:h-[288px] w-full"
           src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
           alt={movie.title || ("name" in movie ? movie.name : "")}
         />
