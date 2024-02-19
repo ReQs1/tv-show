@@ -2,12 +2,12 @@ import { Link, useSearchParams } from "react-router-dom";
 import { MovieType, ShowType } from "@/lib/types";
 import { truncate } from "@/lib/utils";
 
-type GenreCardProps = {
+type CardProps = {
   movie: ShowType | MovieType;
   lastRef?: (node: HTMLDivElement | null) => void;
 };
 
-function GenreCard({ movie, lastRef }: GenreCardProps) {
+function InfiniteScrollCard({ movie, lastRef }: CardProps) {
   const [searchParams] = useSearchParams();
   const type = searchParams.get("view");
 
@@ -16,7 +16,7 @@ function GenreCard({ movie, lastRef }: GenreCardProps) {
       <Link to={`/${type}/${movie.id}`}>
         <img
           loading="lazy"
-          className="rounded-lg md:h-[288px] w-full"
+          className="rounded-lg md:h-[288px] w-full object-cover"
           src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
           alt={movie.title || ("name" in movie ? movie.name : "")}
         />
@@ -37,4 +37,4 @@ function GenreCard({ movie, lastRef }: GenreCardProps) {
   );
 }
 
-export default GenreCard;
+export default InfiniteScrollCard;

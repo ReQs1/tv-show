@@ -1,15 +1,15 @@
 import { useEffect } from "react";
 import { useInfiniteQuery, useQuery } from "react-query";
 import { Link, useParams, useSearchParams } from "react-router-dom";
+import { useInView } from "react-intersection-observer";
 
+import InfiniteScrollCard from "@/components/InfiniteScrollCard";
 import { Skeleton } from "@/components/skeleton";
+import ScrollToTopBtn from "@/components/ScrollToTopBtn";
 
 import { getGenreById, getGenreMovies } from "@/services/themoviedbAPI";
 import { MovieType, ShowType } from "@/lib/types";
 import { cn } from "@/lib/utils";
-import ScrollToTopBtn from "@/components/ScrollToTopBtn";
-import GenreCard from "@/components/GenreCard";
-import { useInView } from "react-intersection-observer";
 
 function GenrePage() {
   const { ref, inView } = useInView();
@@ -118,10 +118,14 @@ function GenrePage() {
               page.results.map((movie: MovieType | ShowType, i: number) => {
                 if (i + 1 === page.results.length) {
                   return (
-                    <GenreCard lastRef={ref} movie={movie} key={movie.id} />
+                    <InfiniteScrollCard
+                      lastRef={ref}
+                      movie={movie}
+                      key={movie.id}
+                    />
                   );
                 }
-                return <GenreCard movie={movie} key={movie.id} />;
+                return <InfiniteScrollCard movie={movie} key={movie.id} />;
               })
             )}
           {isFetchingNextPage &&

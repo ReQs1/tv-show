@@ -1,9 +1,10 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import NoPageFound from "./pages/NoPageFound";
-import AppLayout from "./components/AppLayout";
-import HomePage from "./pages/HomePage";
 import { QueryClient, QueryClientProvider } from "react-query";
+
+import NoPageFound from "./pages/NoPageFound";
+import HomePage from "./pages/HomePage";
 import GenrePage from "./pages/GenrePage";
+import AppLayout from "./components/AppLayout";
 
 const queryClient = new QueryClient();
 
