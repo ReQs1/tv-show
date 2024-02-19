@@ -17,19 +17,25 @@ import GenresList from "@/components/GenresList";
 import MoviesCarousel from "@/components/MoviesCarousel";
 
 function HomePage() {
-  const { data: trendingShows } = useQuery("trendingShows", getTrendingShows);
+  const { data: trendingShows, isLoading: trendingShowsLoading } = useQuery(
+    "trendingShows",
+    getTrendingShows
+  );
 
-  const { data: trendingMovies } = useQuery(
+  const { data: trendingMovies, isLoading: trendingMoviesLoading } = useQuery(
     "trendingMovies",
     getTrendingMovies
   );
 
-  const { data: nowPlayingMovies } = useQuery(
+  const { data: nowPlayingMovies, isLoading: nowPlayingLoading } = useQuery(
     "nowPlaying",
     getNowPlayingMovies
   );
 
-  const { data: airingShows } = useQuery("airingShows", getAiringShows);
+  const { data: airingShows, isLoading: airingShowsLoading } = useQuery(
+    "airingShows",
+    getAiringShows
+  );
 
   const LottieRef = useRef<LottieRefCurrentProps>(null);
   LottieRef.current?.setSpeed(0.8);
@@ -73,24 +79,28 @@ function HomePage() {
         data={trendingShows}
         title="Trending Shows"
         description="Shows with most reactions in the last 3 days"
+        isLoading={trendingShowsLoading}
       />
 
       <MoviesCarousel
         data={trendingMovies}
         title="Trending Movies"
         description="Movies with most reactions in the last 3 days"
+        isLoading={trendingMoviesLoading}
       />
 
       <MoviesCarousel
         data={nowPlayingMovies}
         title="Now Playing Movies"
         description="Movies that are currently in theatres"
+        isLoading={nowPlayingLoading}
       />
 
       <MoviesCarousel
         data={airingShows}
         title="Airing Today"
         description="TV shows airing today"
+        isLoading={airingShowsLoading}
       />
 
       <GenresList />

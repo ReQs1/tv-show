@@ -1,6 +1,6 @@
+import { Link, useSearchParams } from "react-router-dom";
 import { MovieType, ShowType } from "@/lib/types";
 import { truncate } from "@/lib/utils";
-import { Link, useSearchParams } from "react-router-dom";
 
 type GenreCardProps = {
   movie: ShowType | MovieType;
