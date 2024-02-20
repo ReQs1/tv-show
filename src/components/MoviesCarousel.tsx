@@ -33,6 +33,7 @@ function MoviesCarousel({
           loop: true,
           align: "start",
           dragFree: true,
+          slidesToScroll: "auto",
         }}
       >
         <CarouselContent className="-ml-4">
