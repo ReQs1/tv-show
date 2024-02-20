@@ -108,8 +108,8 @@ function GenrePage() {
               .map((_, i) => {
                 return (
                   <div className="w-48 space-y-2" key={i}>
-                    <Skeleton className="md:h-[288px] md:w-[100%]" />
-                    <Skeleton className="md:h-[30px] md:w-[100%]" />
+                    <Skeleton className="h-[288px] w-[100%]" />
+                    <Skeleton className="h-[30px] w-[100%]" />
                   </div>
                 );
               })}
@@ -134,8 +134,8 @@ function GenrePage() {
               .map((_, i) => {
                 return (
                   <div className="w-48 space-y-4" key={i}>
-                    <Skeleton className="md:h-[288px] md:w-[100%]" />
-                    <Skeleton className="md:h-[30px] md:w-[100%]" />
+                    <Skeleton className="h-[288px] w-[100%]" />
+                    <Skeleton className="h-[30px] w-[100%]" />
                   </div>
                 );
               })}

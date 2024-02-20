@@ -1,30 +1,29 @@
-# React + TypeScript + Vite
+# ScreenSaga
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+ScreenSaga is a web application that allows users to search for movies, series, or TV shows. With a clean and intuitive interface, users can easily discover new content to watch based on their preferences.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Search Functionality**: Users can search for movies, series, or TV shows by entering keywords.
+- **Detailed Information**: Each search result displays detailed information about the selected movie, series, or TV show, including synopsis, ratings, cast, and more.
+- **Responsive Design**: ScreenSaga is built with responsiveness in mind, ensuring a seamless user experience across various devices and screen sizes.
+- **React with TypeScript**: The application is developed using React.js with TypeScript, providing type safety and improved code maintainability.
+- **Tailwind CSS**: Tailwind CSS is utilized for styling, enabling rapid development and customization of UI components.
+- **Framer Motion**: Framer Motion is integrated for smooth animations, enhancing the overall user experience.
 
-## Expanding the ESLint configuration
+## Live Preview
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Check out the live preview of ScreenSaga [here](https://tv-show-five.vercel.app).
 
-- Configure the top-level `parserOptions` property like this:
+## Getting Started
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+To run ScreenSaga locally on your machine, follow these steps:
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+1. Clone this repository: `git clone https://github.com/your-username/ScreenSaga.git`.
+2. Navigate to the project directory: `cd ScreenSaga`.
+3. Install dependencies: `npm install`.
+4. Start the development server: `npm run dev`.
+
+## License
+
+This project is licensed under the MIT License.
