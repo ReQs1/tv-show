@@ -19,8 +19,8 @@ Check out the live preview of ScreenSaga [here](https://tv-show-five.vercel.app)
 
 To run ScreenSaga locally on your machine, follow these steps:
 
-1. Clone this repository: `git clone https://github.com/your-username/ScreenSaga.git`.
-2. Navigate to the project directory: `cd ScreenSaga`.
+1. Clone this repository: `git clone https://github.com/ReQs1/tv-show.git`.
+2. Navigate to the project directory: `cd tv-show`.
 3. Install dependencies: `npm install`.
 4. Start the development server: `npm run dev`.
 
