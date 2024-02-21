@@ -12,7 +12,9 @@ import { MovieType, ShowType } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
 function GenrePage() {
-  const { ref, inView } = useInView();
+  const { ref, inView } = useInView({
+    threshold: 1,
+  });
   const [searchParams] = useSearchParams();
   const { genreId = "" } = useParams();
   const type = searchParams.get("view") || "";
@@ -124,7 +126,10 @@ function GenrePage() {
               .fill(0)
               .map((_, i) => {
                 return (
-                  <div className="w-48 space-y-2" key={i}>
+                  <div
+                    className="flex flex-col flex-1 space-y-2 basis-48"
+                    key={i}
+                  >
                     <Skeleton className="h-[288px] w-[100%]" />
                     <Skeleton className="h-[30px] w-[100%]" />
                   </div>
@@ -159,11 +164,14 @@ function GenrePage() {
             })}
 
           {isFetchingNextPage &&
-            Array(15)
+            Array(20)
               .fill(0)
               .map((_, i) => {
                 return (
-                  <div className="w-48 space-y-4" key={i}>
+                  <div
+                    className="flex flex-col flex-1 space-y-2 basis-48"
+                    key={i}
+                  >
                     <Skeleton className="h-[288px] w-[100%]" />
                     <Skeleton className="h-[30px] w-[100%]" />
                   </div>
