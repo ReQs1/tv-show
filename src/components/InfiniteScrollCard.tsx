@@ -7,25 +7,37 @@ import { getMovieDetails } from "@/services/themoviedbAPI";
 type CardProps = {
   movie: ShowType | MovieType;
   lastRef?: (node: HTMLDivElement | null) => void;
-  type: string;
-  currentGenre: string;
+  type?: string;
+  currentGenre?: string;
 };
 
-function InfiniteScrollCard({
-  movie,
-  lastRef,
-  type = "",
-  currentGenre,
-}: CardProps) {
-  const { data: movieDetail } = useQuery({
+function InfiniteScrollCard({ movie, lastRef, type, currentGenre }: CardProps) {
+  const { data, isLoading } = useQuery({
     queryKey: ["infiniteScrollDetails", movie.id, type],
-    queryFn: () => getMovieDetails(movie.id, type),
+    queryFn: () => {
+      if (type) {
+        return getMovieDetails(movie.id, type);
+      }
+    },
   });
 
-  console.log(movieDetail);
+  let movieDetail: string | number;
+
+  if (isLoading) {
+    movieDetail = "Loading...";
+  } else if (data && type === "movie") {
+    movieDetail = data.runtime === 0 ? "Unreleased" : formatTime(data.runtime);
+  } else if (data && type === "tv") {
+    movieDetail =
+      data.seasons.length === 1
+        ? data.seasons.length + " season"
+        : data.seasons.length + " seasons";
+  } else {
+    movieDetail = "Unknown";
+  }
 
   return (
-    <div className="flex flex-col flex-1 basis-52" ref={lastRef}>
+    <div className="flex flex-col flex-1 basis-48" ref={lastRef}>
       <Link to={`/${type}/${movie.id}`}>
         <img
           loading="lazy"
@@ -35,32 +47,39 @@ function InfiniteScrollCard({
         />
       </Link>
       <div className="flex flex-col justify-between flex-1 gap-2">
-        <h3 className="mt-3 text-lg font-semibold">
+        <h3 className="mt-3 text-2xl font-semibold md:text-lg">
           {truncate(movie.title) ||
             ("name" in movie ? truncate(movie.name) : "")}
         </h3>
-        <ul className="flex gap-2">
-          <li>
-            {type === "movie"
-              ? formatTime(movieDetail?.runtime)
-              : type === "tv"
-              ? movieDetail?.seasons?.length === 1
-                ? movieDetail?.seasons?.length + " season"
-                : movieDetail?.seasons?.length + " seasons"
-              : ""}
-          </li>
-          <li>•</li>
-          <li>
+        {!(currentGenre === "") ? (
+          <ul className="flex gap-2 text-lg md:text-base">
+            <li>{movieDetail}</li>
+            <li>•</li>
+            <li>
+              {movie.release_date?.slice(0, 4) ||
+                ("first_air_date" in movie
+                  ? movie.first_air_date?.slice(0, 4)
+                  : "")}
+            </li>
+          </ul>
+        ) : (
+          <p>
             {movie.release_date?.slice(0, 4) ||
               ("first_air_date" in movie
                 ? movie.first_air_date?.slice(0, 4)
                 : "")}
-          </li>
-        </ul>
-        <p className="flex items-center gap-3 text-sm font-medium uppercase">
-          <img src={`/${type}Icon.svg`} alt={`${type} Icon`} className="w-5" />
-          <span className="tracking-widest">{currentGenre}</span>
-        </p>
+          </p>
+        )}
+        {!(currentGenre === "") && (
+          <p className="flex items-center gap-3 text-base font-medium uppercase md:text-sm">
+            <img
+              src={`/${type}Icon.svg`}
+              alt={`${type} Icon`}
+              className="w-5"
+            />
+            <span className="tracking-widest">{currentGenre}</span>
+          </p>
+        )}
       </div>
     </div>
   );

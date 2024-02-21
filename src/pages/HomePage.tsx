@@ -4,8 +4,7 @@ import { useQuery } from "react-query";
 import {
   getAiringShows,
   getNowPlayingMovies,
-  getTrendingMovies,
-  getTrendingShows,
+  getTrending,
 } from "@/services/themoviedbAPI";
 
 import animationData from "../assets/tv-show-animation.json";
@@ -17,15 +16,15 @@ import GenresList from "@/components/GenresList";
 import MoviesCarousel from "@/components/MoviesCarousel";
 
 function HomePage() {
-  const { data: trendingShows, isLoading: trendingShowsLoading } = useQuery(
-    "trendingShows",
-    getTrendingShows
-  );
+  const { data: trendingShows, isLoading: trendingShowsLoading } = useQuery({
+    queryKey: "trendingShows",
+    queryFn: () => getTrending("tv"),
+  });
 
-  const { data: trendingMovies, isLoading: trendingMoviesLoading } = useQuery(
-    "trendingMovies",
-    getTrendingMovies
-  );
+  const { data: trendingMovies, isLoading: trendingMoviesLoading } = useQuery({
+    queryKey: "trendingMovies",
+    queryFn: () => getTrending("movie"),
+  });
 
   const { data: nowPlayingMovies, isLoading: nowPlayingLoading } = useQuery(
     "nowPlaying",
@@ -75,33 +74,41 @@ function HomePage() {
         </div>
       </div>
 
-      <MoviesCarousel
-        data={trendingShows}
-        title="Trending Shows"
-        description="Shows with most reactions in the last 3 days"
-        isLoading={trendingShowsLoading}
-      />
+      {trendingShows && (
+        <MoviesCarousel
+          data={trendingShows}
+          title="Trending Shows"
+          description="Shows with most reactions in the last 3 days"
+          isLoading={trendingShowsLoading}
+        />
+      )}
 
-      <MoviesCarousel
-        data={trendingMovies}
-        title="Trending Movies"
-        description="Movies with most reactions in the last 3 days"
-        isLoading={trendingMoviesLoading}
-      />
+      {trendingMovies && (
+        <MoviesCarousel
+          data={trendingMovies}
+          title="Trending Movies"
+          description="Movies with most reactions in the last 3 days"
+          isLoading={trendingMoviesLoading}
+        />
+      )}
 
-      <MoviesCarousel
-        data={nowPlayingMovies}
-        title="Now Playing Movies"
-        description="Movies that are currently in theatres"
-        isLoading={nowPlayingLoading}
-      />
+      {nowPlayingMovies && (
+        <MoviesCarousel
+          data={nowPlayingMovies}
+          title="Now Playing Movies"
+          description="Movies that are currently in theatres"
+          isLoading={nowPlayingLoading}
+        />
+      )}
 
-      <MoviesCarousel
-        data={airingShows}
-        title="Airing Today"
-        description="TV shows airing today"
-        isLoading={airingShowsLoading}
-      />
+      {airingShows && (
+        <MoviesCarousel
+          data={airingShows}
+          title="Airing Today"
+          description="TV shows airing today"
+          isLoading={airingShowsLoading}
+        />
+      )}
 
       <GenresList />
     </>

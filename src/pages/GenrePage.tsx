@@ -17,7 +17,7 @@ function GenrePage() {
   const { genreId = "" } = useParams();
   const type = searchParams.get("view") || "";
 
-  const { data: genre } = useQuery({
+  const { data: genre, isSuccess: isGenreFetchingSuccess } = useQuery({
     queryKey: "genres",
     queryFn: () => getGenreById(genreId, type),
   });
@@ -45,12 +45,28 @@ function GenrePage() {
     queryKey: ["genre", genreId, type],
     queryFn: ({ pageParam = 1 }) => getGenreMovies(genreId, type, pageParam),
     getNextPageParam: (lastPage) => {
-      if (lastPage.page < lastPage.total_pages) {
+      if (lastPage && lastPage.page < lastPage.total_pages) {
         return lastPage.page + 1;
       }
       return undefined;
     },
   });
+
+  const uniqueData = data
+    ? data.pages.reduce((acc, page) => {
+        if (page) {
+          const uniqueMovies = page.results.filter(
+            (movie: MovieType | ShowType) => {
+              return !acc.find(
+                (accMovie: MovieType | ShowType) => accMovie.id === movie.id
+              );
+            }
+          );
+          return [...acc, ...uniqueMovies];
+        }
+        return acc;
+      }, [])
+    : [];
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -66,7 +82,7 @@ function GenrePage() {
     <div className="px-6 my-12 md:px-20 md:my-20">
       <div className="flex flex-col gap-4 mb-8 md:gap-8 md:flex-row md:items-center">
         <h1 className="text-3xl font-bold md:text-4xl">
-          Genres / {genre?.name}
+          Genres / {isGenreFetchingSuccess && genre && genre.name}
         </h1>
         <div className="space-x-4 md:space-x-8">
           <Link
@@ -101,7 +117,7 @@ function GenrePage() {
       </div>
       {/* */}
       <section>
-        <div className="flex flex-wrap gap-6">
+        <div className="flex flex-wrap md:gap-6 gap-9">
           {isLoading &&
             Array(15)
               .fill(0)
@@ -114,29 +130,27 @@ function GenrePage() {
                 );
               })}
           {isSuccess &&
-            data?.pages.map((page) =>
-              page.results.map((movie: MovieType | ShowType, i: number) => {
-                if (i + 1 === page.results.length) {
-                  return (
-                    <InfiniteScrollCard
-                      lastRef={ref}
-                      movie={movie}
-                      key={movie.id}
-                      type={type}
-                      currentGenre={genre.name}
-                    />
-                  );
-                }
+            uniqueData.map((movie: MovieType | ShowType, i: number) => {
+              if (i + 1 === uniqueData.length) {
                 return (
                   <InfiniteScrollCard
+                    lastRef={ref}
                     movie={movie}
                     key={movie.id}
                     type={type}
-                    currentGenre={genre.name}
+                    currentGenre={genre && genre.name}
                   />
                 );
-              })
-            )}
+              }
+              return (
+                <InfiniteScrollCard
+                  movie={movie}
+                  key={movie.id}
+                  type={type}
+                  currentGenre={genre && genre.name}
+                />
+              );
+            })}
           {isFetchingNextPage &&
             Array(15)
               .fill(0)

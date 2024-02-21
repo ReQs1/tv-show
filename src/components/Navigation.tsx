@@ -8,7 +8,7 @@ function Navigation() {
       <SearchInput />
       <ul className="relative flex flex-col gap-6 text-xl md:gap-8 md:text-base md:flex-row xl:text-xl xl:gap-14">
         <li>
-          <NavLink to="/shows">Shows</NavLink>
+          <NavLink to="/tv">Shows</NavLink>
           <span className="sr-only">Link to Tv Shows</span>
         </li>
         <li>
