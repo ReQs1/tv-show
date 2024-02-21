@@ -17,7 +17,7 @@ function GenrePage() {
   const { genreId = "" } = useParams();
   const type = searchParams.get("view") || "";
 
-  const { data: genre, isSuccess: isGenreFetchingSuccess } = useQuery({
+  const { data: genre } = useQuery({
     queryKey: "genres",
     queryFn: () => getGenreById(genreId, type),
   });
@@ -46,7 +46,7 @@ function GenrePage() {
     queryKey: ["genre", genreId, type],
     queryFn: ({ pageParam = 1 }) => getGenreMovies(genreId, type, pageParam),
     getNextPageParam: (lastPage) => {
-      if (lastPage && lastPage.page < lastPage.total_pages) {
+      if (lastPage.page < lastPage.total_pages) {
         return lastPage.page + 1;
       }
       return undefined;
@@ -83,7 +83,7 @@ function GenrePage() {
     <div className="px-6 my-12 md:px-20 md:my-20">
       <div className="flex flex-col gap-4 mb-8 md:gap-8 md:flex-row md:items-center">
         <h1 className="text-3xl font-bold md:text-4xl">
-          Genres / {isGenreFetchingSuccess && genre && genre.name}
+          Genres / {genre && genre.name}
         </h1>
         <div className="space-x-4 md:space-x-8">
           <Link
@@ -130,9 +130,11 @@ function GenrePage() {
                   </div>
                 );
               })}
+
           {error && (
             <p>{`Couldn't fetch ${type === "tv" ? "TV Shows" : "Movies"}`}</p>
           )}
+
           {isSuccess &&
             uniqueData.map((movie: MovieType | ShowType, i: number) => {
               if (i + 1 === uniqueData.length) {
@@ -155,6 +157,7 @@ function GenrePage() {
                 />
               );
             })}
+
           {isFetchingNextPage &&
             Array(15)
               .fill(0)
