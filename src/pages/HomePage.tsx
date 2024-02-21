@@ -84,14 +84,21 @@ function HomePage() {
         </div>
       </div>
 
+      {trendingShowsError && (
+        <p className="my-10 text-center">Error fetching trending shows</p>
+      )}
+
       {trendingShows && (
         <MoviesCarousel
           data={trendingShows}
           title="Trending Shows"
           description="Shows with most reactions in the last 3 days"
           isLoading={trendingShowsLoading}
-          error={trendingShowsError}
         />
+      )}
+
+      {trendingMoviesError && (
+        <p className="my-10 text-center">Error fetching trending Movies</p>
       )}
 
       {trendingMovies && (
@@ -100,8 +107,11 @@ function HomePage() {
           title="Trending Movies"
           description="Movies with most reactions in the last 3 days"
           isLoading={trendingMoviesLoading}
-          error={trendingMoviesError}
         />
+      )}
+
+      {nowPlayingError && (
+        <p className="my-10 text-center">Error fetching Now Playing Movies</p>
       )}
 
       {nowPlayingMovies && (
@@ -110,8 +120,11 @@ function HomePage() {
           title="Now Playing Movies"
           description="Movies that are currently in theatres"
           isLoading={nowPlayingLoading}
-          error={nowPlayingError}
         />
+      )}
+
+      {airingShowsError && (
+        <p className="my-10 text-center">Error fetching Airing Shows</p>
       )}
 
       {airingShows && (
@@ -120,7 +133,6 @@ function HomePage() {
           title="Airing Today"
           description="TV shows airing today"
           isLoading={airingShowsLoading}
-          error={airingShowsError}
         />
       )}
 

@@ -121,7 +121,6 @@ export async function getMovieDetails(
       options
     );
     const data = await res.json();
-    console.log(data);
     return data;
   } catch (e: any) {
     console.error(`Error fetching movie details: ${e}`);

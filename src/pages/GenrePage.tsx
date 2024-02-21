@@ -120,7 +120,7 @@ function GenrePage() {
       <section>
         <div className="flex flex-wrap md:gap-6 gap-9">
           {isLoading &&
-            Array(15)
+            Array(20)
               .fill(0)
               .map((_, i) => {
                 return (
@@ -130,7 +130,9 @@ function GenrePage() {
                   </div>
                 );
               })}
-          {error && <p>Couldn't fetch movies</p>}
+          {error && (
+            <p>{`Couldn't fetch ${type === "tv" ? "TV Shows" : "Movies"}`}</p>
+          )}
           {isSuccess &&
             uniqueData.map((movie: MovieType | ShowType, i: number) => {
               if (i + 1 === uniqueData.length) {

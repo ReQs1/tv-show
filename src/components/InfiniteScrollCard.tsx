@@ -56,7 +56,7 @@ function InfiniteScrollCard({ movie, lastRef, type, currentGenre }: CardProps) {
         {!(currentGenre === "") ? (
           <ul className="flex gap-2 text-lg md:text-base">
             <li>{movieDetail}</li>
-            <li>•</li>
+            {!error && <li>•</li>}
             <li>
               {movie.release_date?.slice(0, 4) ||
                 ("first_air_date" in movie
