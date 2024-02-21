@@ -50,54 +50,104 @@ export type InfiniteScrollType = {
   total_results: number;
 };
 
-export interface MovieDetails extends MovieType, ShowType {
-  tagline: string;
-  status: string;
-  runtime: number;
-  revenue: number;
-  production_companies: { name: string; id: number }[];
-  production_countries: { iso_3166_1: string; name: string }[];
-  spoken_languages: { iso_639_1: string; name: string }[];
-
-  created_by: { id: number; credit_id: string; name: string }[];
-  episode_run_time: number[];
+export type MovieDetails = {
+  adult: boolean;
+  backdrop_path: string;
+  belongs_to_collection: null;
+  budget: number;
   genres: GenresType[];
   homepage: string;
+  id: number;
+  imdb_id: string;
+  original_language: string;
+  original_title: string;
+  overview: string;
+  popularity: number;
+  poster_path: string;
+  production_companies: {
+    id: number;
+    logo_path: string;
+    name: string;
+    origin_country: string;
+  }[];
+  production_countries: {
+    iso_3166_1: string;
+    name: string;
+  }[];
+  release_date: string;
+  revenue: number;
+  runtime: number;
+  spoken_languages: {
+    english_name: string;
+    iso_639_1: string;
+    name: string;
+  }[];
+  status: string;
+  tagline: string;
+  title: string;
+  video: boolean;
+  vote_average: number;
+  vote_count: number;
+};
+
+export type ShowDetails = {
+  adult: boolean;
+  backdrop_path: string;
+  created_by: {
+    id: number;
+    credit_id: string;
+    name: string;
+    gender: number;
+    profile_path: string;
+  };
+  episode_run_time: number[];
+  first_air_date: string;
+  genres: GenresType[];
+  homepage: string;
+  id: number;
   in_production: boolean;
   languages: string[];
   last_air_date: string;
   last_episode_to_air: {
-    air_date: string;
-    episode_number: number;
     id: number;
     name: string;
     overview: string;
-    production_code: string;
-    season_number: number;
-    still_path: string;
     vote_average: number;
     vote_count: number;
-  };
-  next_episode_to_air: {
     air_date: string;
     episode_number: number;
-    id: number;
-    name: string;
-    overview: string;
     production_code: string;
+    runtime: number;
     season_number: number;
+    show_id: number;
     still_path: string;
-    vote_average: number;
-    vote_count: number;
   };
+  name: string;
+  next_episode_to_air: string;
   networks: {
-    name: string;
     id: number;
     logo_path: string;
+    name: string;
     origin_country: string;
-  }[];
+  };
   number_of_episodes: number;
   number_of_seasons: number;
+  origin_country: string[];
+  original_language: string;
+  original_name: string;
+  overview: string;
+  popularity: number;
+  poster_path: string;
+  production_companies: {
+    id: number;
+    logo_path: string;
+    name: string;
+    origin_country: string;
+  }[];
+  production_countries: {
+    iso_3166_1: string;
+    name: string;
+  }[];
   seasons: {
     air_date: string;
     episode_count: number;
@@ -106,6 +156,15 @@ export interface MovieDetails extends MovieType, ShowType {
     overview: string;
     poster_path: string;
     season_number: number;
-    vote_average: number;
   }[];
-}
+  spoken_languages: {
+    english_name: string;
+    iso_639_1: string;
+    name: string;
+  }[];
+  status: string;
+  tagline: string;
+  type: string;
+  vote_average: number;
+  vote_count: number;
+};

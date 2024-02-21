@@ -2,6 +2,7 @@ import type {
   GenresType,
   MovieDetails,
   MovieType,
+  ShowDetails,
   ShowType,
 } from "@/lib/types";
 
@@ -27,7 +28,7 @@ export async function getTrending(
     const data = await res.json();
     return data.results;
   } catch (error) {
-    console.error(error);
+    console.error(`Error fetching trending ${type} movies: ${error}`);
     return [];
   }
 }
@@ -41,7 +42,7 @@ export async function getNowPlayingMovies(): Promise<ShowType[] | MovieType[]> {
     const data = await res.json();
     return data.results;
   } catch (error) {
-    console.error(error);
+    console.error(`Error fetching now playing movies: ${error}`);
     return [];
   }
 }
@@ -55,7 +56,7 @@ export async function getAiringShows(): Promise<ShowType[] | MovieType[]> {
     const data = await res.json();
     return data.results;
   } catch (error) {
-    console.error(error);
+    console.error(`Error fetching airing shows: ${error}`);
     return [];
   }
 }
@@ -69,7 +70,7 @@ export async function getGenres(type: string): Promise<GenresType[]> {
     const data = await res.json();
     return data.genres;
   } catch (error) {
-    console.error(error);
+    console.error(`Error fetching ${type} genres: ${error}`);
     return [];
   }
 }
@@ -92,7 +93,7 @@ export async function getGenreById(
 
     return genre;
   } catch (error) {
-    console.error(error);
+    console.error(`Error fetching ${type} genres: ${error}`);
   }
 }
 
@@ -105,22 +106,23 @@ export async function getGenreMovies(id: string, type: string, page: number) {
     const data = await res.json();
     return data;
   } catch (error) {
-    console.error(error);
+    console.error(`Error fetching genre movies: ${error}`);
   }
 }
 
 export async function getMovieDetails(
   id: number,
   type: string
-): Promise<MovieDetails | undefined> {
+): Promise<MovieDetails | ShowDetails | undefined> {
   try {
     const res = await fetch(
       `${BASE_URL}/${VERSION}/${type}/${id}?language=en-US`,
       options
     );
     const data = await res.json();
+    console.log(data);
     return data;
   } catch (error) {
-    console.error(error);
+    console.error(`Error fetching movie details: ${error}`);
   }
 }
