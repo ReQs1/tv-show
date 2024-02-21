@@ -25,9 +25,9 @@ function InfiniteScrollCard({ movie, lastRef, type, currentGenre }: CardProps) {
 
   if (isLoading) {
     movieDetail = "Loading...";
-  } else if (data && type === "movie") {
+  } else if (data && type === "movie" && "runtime" in data) {
     movieDetail = data.runtime === 0 ? "Unreleased" : formatTime(data.runtime);
-  } else if (data && type === "tv") {
+  } else if (data && type === "tv" && "seasons" in data) {
     movieDetail =
       data.seasons.length === 1
         ? data.seasons.length + " season"

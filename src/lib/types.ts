@@ -37,30 +37,13 @@ export type ShowType = {
   vote_count: number;
 };
 
-export type GenresType = {
-  id: number;
-  name: string;
-  type?: string;
-};
-
-export type InfiniteScrollType = {
-  page: number;
-  results: MovieType[] | ShowType[];
-  total_pages: number;
-  total_results: number;
-};
-
-export type MovieDetails = {
+type MainType = {
   adult: boolean;
   backdrop_path: string;
-  belongs_to_collection: null;
-  budget: number;
   genres: GenresType[];
   homepage: string;
   id: number;
-  imdb_id: string;
   original_language: string;
-  original_title: string;
   overview: string;
   popularity: number;
   poster_path: string;
@@ -74,9 +57,6 @@ export type MovieDetails = {
     iso_3166_1: string;
     name: string;
   }[];
-  release_date: string;
-  revenue: number;
-  runtime: number;
   spoken_languages: {
     english_name: string;
     iso_639_1: string;
@@ -84,15 +64,23 @@ export type MovieDetails = {
   }[];
   status: string;
   tagline: string;
-  title: string;
-  video: boolean;
   vote_average: number;
   vote_count: number;
 };
 
-export type ShowDetails = {
-  adult: boolean;
-  backdrop_path: string;
+export type MovieDetails = MainType & {
+  belongs_to_collection: null;
+  budget: number;
+  imdb_id: string;
+  original_title: string;
+  release_date: string;
+  revenue: number;
+  runtime: number;
+  title: string;
+  video: boolean;
+};
+
+export type ShowDetails = MainType & {
   created_by: {
     id: number;
     credit_id: string;
@@ -102,9 +90,6 @@ export type ShowDetails = {
   };
   episode_run_time: number[];
   first_air_date: string;
-  genres: GenresType[];
-  homepage: string;
-  id: number;
   in_production: boolean;
   languages: string[];
   last_air_date: string;
@@ -133,21 +118,7 @@ export type ShowDetails = {
   number_of_episodes: number;
   number_of_seasons: number;
   origin_country: string[];
-  original_language: string;
   original_name: string;
-  overview: string;
-  popularity: number;
-  poster_path: string;
-  production_companies: {
-    id: number;
-    logo_path: string;
-    name: string;
-    origin_country: string;
-  }[];
-  production_countries: {
-    iso_3166_1: string;
-    name: string;
-  }[];
   seasons: {
     air_date: string;
     episode_count: number;
@@ -157,14 +128,11 @@ export type ShowDetails = {
     poster_path: string;
     season_number: number;
   }[];
-  spoken_languages: {
-    english_name: string;
-    iso_639_1: string;
-    name: string;
-  }[];
-  status: string;
-  tagline: string;
   type: string;
-  vote_average: number;
-  vote_count: number;
+};
+
+export type GenresType = {
+  id: number;
+  name: string;
+  type?: string;
 };
