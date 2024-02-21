@@ -122,10 +122,19 @@ function GenrePage() {
                       lastRef={ref}
                       movie={movie}
                       key={movie.id}
+                      type={type}
+                      currentGenre={genre.name}
                     />
                   );
                 }
-                return <InfiniteScrollCard movie={movie} key={movie.id} />;
+                return (
+                  <InfiniteScrollCard
+                    movie={movie}
+                    key={movie.id}
+                    type={type}
+                    currentGenre={genre.name}
+                  />
+                );
               })
             )}
           {isFetchingNextPage &&

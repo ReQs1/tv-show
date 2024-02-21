@@ -27,3 +27,27 @@ export const mergeGenres = (
 export function truncate(str: string, n = 50) {
   return str?.length > n ? str.slice(0, n - 1) + "..." : str;
 }
+
+export function formatTime(minutes: number) {
+  if (isNaN(minutes) || minutes < 0) {
+    return "Invalid input";
+  }
+
+  const hours = Math.floor(minutes / 60);
+  const remainingMinutes = minutes % 60;
+
+  let formattedTime = "";
+
+  if (hours > 0) {
+    formattedTime += hours + "h";
+  }
+
+  if (remainingMinutes > 0) {
+    if (formattedTime !== "") {
+      formattedTime += " ";
+    }
+    formattedTime += remainingMinutes + "min";
+  }
+
+  return formattedTime !== "" ? formattedTime : "0min";
+}

@@ -104,3 +104,16 @@ export async function getGenreMovies(id: string, type: string, page: number) {
     console.error(error);
   }
 }
+
+export async function getMovieDetails(id: number, type: string) {
+  try {
+    const res = await fetch(
+      `https://api.themoviedb.org/3/${type}/${id}?language=en-US`,
+      options
+    );
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+}
