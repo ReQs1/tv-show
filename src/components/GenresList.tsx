@@ -1,4 +1,4 @@
-import { type GenresType } from "@/lib/types";
+import { type GenreType } from "@/lib/types";
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -24,11 +24,11 @@ const variants = {
 const MotionLink = motion(Link);
 
 function GenresList() {
-  const { data: movieGenres } = useQuery({
+  const { data: movieGenres, error: moviesError } = useQuery({
     queryKey: "movieGenres",
     queryFn: () => getGenres("movie"),
   });
-  const { data: tvShowGenres } = useQuery({
+  const { data: tvShowGenres, error: showsError } = useQuery({
     queryKey: "tvShowGenres",
     queryFn: () => getGenres("tv"),
   });
@@ -45,21 +45,25 @@ function GenresList() {
         }}
         className="flex flex-wrap justify-center gap-4 mt-12 lg:gap-6"
       >
-        {mergedGenres?.map((genre: GenresType) => (
-          <MotionLink
-            to={`genres/${genre.id}?view=${genre.type}`}
-            key={genre.id}
-            className="px-4 py-2 text-white transition-colors bg-yellow-400 rounded-full cursor-pointer hover:bg-yellow-500"
-            variants={variants}
-            initial="initial"
-            whileInView="animate"
-            viewport={{
-              once: true,
-            }}
-          >
-            {genre.name}
-          </MotionLink>
-        ))}
+        {moviesError || showsError ? (
+          <p>Couldn't load genres</p>
+        ) : (
+          mergedGenres.map((genre: GenreType) => (
+            <MotionLink
+              to={`genres/${genre.id}?view=${genre.type}`}
+              key={genre.id}
+              className="px-4 py-2 text-white transition-colors bg-yellow-400 rounded-full cursor-pointer hover:bg-yellow-500"
+              variants={variants}
+              initial="initial"
+              whileInView="animate"
+              viewport={{
+                once: true,
+              }}
+            >
+              {genre.name}
+            </MotionLink>
+          ))
+        )}
       </motion.div>
     </div>
   );

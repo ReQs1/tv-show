@@ -12,7 +12,7 @@ type CardProps = {
 };
 
 function InfiniteScrollCard({ movie, lastRef, type, currentGenre }: CardProps) {
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, error } = useQuery({
     queryKey: ["infiniteScrollDetails", movie.id, type],
     queryFn: () => {
       if (type) {
@@ -25,6 +25,8 @@ function InfiniteScrollCard({ movie, lastRef, type, currentGenre }: CardProps) {
 
   if (isLoading) {
     movieDetail = "Loading...";
+  } else if (error) {
+    movieDetail = "Couldn't load details";
   } else if (data && type === "movie" && "runtime" in data) {
     movieDetail = data.runtime === 0 ? "Unreleased" : formatTime(data.runtime);
   } else if (data && type === "tv" && "seasons" in data) {

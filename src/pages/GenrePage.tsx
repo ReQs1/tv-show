@@ -36,6 +36,7 @@ function GenrePage() {
 
   const {
     data,
+    error,
     isLoading,
     isSuccess,
     hasNextPage,
@@ -52,21 +53,21 @@ function GenrePage() {
     },
   });
 
-  const uniqueData = data
-    ? data.pages.reduce((acc, page) => {
-        if (page) {
-          const uniqueMovies = page.results.filter(
-            (movie: MovieType | ShowType) => {
-              return !acc.find(
-                (accMovie: MovieType | ShowType) => accMovie.id === movie.id
-              );
-            }
-          );
-          return [...acc, ...uniqueMovies];
-        }
-        return acc;
-      }, [])
-    : [];
+  const uniqueData =
+    data &&
+    data.pages.reduce((acc, page) => {
+      if (page) {
+        const uniqueMovies = page.results.filter(
+          (movie: MovieType | ShowType) => {
+            return !acc.find(
+              (accMovie: MovieType | ShowType) => accMovie.id === movie.id
+            );
+          }
+        );
+        return [...acc, ...uniqueMovies];
+      }
+      return acc;
+    }, []);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -129,6 +130,7 @@ function GenrePage() {
                   </div>
                 );
               })}
+          {error && <p>Couldn't fetch movies</p>}
           {isSuccess &&
             uniqueData.map((movie: MovieType | ShowType, i: number) => {
               if (i + 1 === uniqueData.length) {

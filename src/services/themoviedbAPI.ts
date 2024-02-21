@@ -1,5 +1,5 @@
 import type {
-  GenresType,
+  GenreType,
   MovieDetails,
   MovieType,
   ShowDetails,
@@ -27,9 +27,9 @@ export async function getTrending(
     );
     const data = await res.json();
     return data.results;
-  } catch (error) {
-    console.error(`Error fetching trending ${type} movies: ${error}`);
-    return [];
+  } catch (e: any) {
+    console.error(`Error fetching trending ${type} movies: ${e}`);
+    throw new Error(e);
   }
 }
 
@@ -41,9 +41,9 @@ export async function getNowPlayingMovies(): Promise<ShowType[] | MovieType[]> {
     );
     const data = await res.json();
     return data.results;
-  } catch (error) {
-    console.error(`Error fetching now playing movies: ${error}`);
-    return [];
+  } catch (e: any) {
+    console.error(`Error fetching now playing movies: ${e}`);
+    throw new Error(e);
   }
 }
 
@@ -55,13 +55,13 @@ export async function getAiringShows(): Promise<ShowType[] | MovieType[]> {
     );
     const data = await res.json();
     return data.results;
-  } catch (error) {
-    console.error(`Error fetching airing shows: ${error}`);
-    return [];
+  } catch (e: any) {
+    console.error(`Error fetching airing shows: ${e}`);
+    throw new Error(e);
   }
 }
 
-export async function getGenres(type: string): Promise<GenresType[]> {
+export async function getGenres(type: string): Promise<GenreType[]> {
   try {
     const res = await fetch(
       `${BASE_URL}/${VERSION}/genre/${type}/list?language=en-US`,
@@ -69,16 +69,16 @@ export async function getGenres(type: string): Promise<GenresType[]> {
     );
     const data = await res.json();
     return data.genres;
-  } catch (error) {
-    console.error(`Error fetching ${type} genres: ${error}`);
-    return [];
+  } catch (e: any) {
+    console.error(`Error fetching ${type} genres: ${e}`);
+    throw new Error(e);
   }
 }
 
 export async function getGenreById(
   id: string,
   type: string
-): Promise<GenresType | undefined> {
+): Promise<GenreType | undefined> {
   try {
     const res = await fetch(
       `${BASE_URL}/${VERSION}/genre/${type}/list?language=en-US`,
@@ -87,7 +87,7 @@ export async function getGenreById(
 
     const data = await res.json();
 
-    const genre = data.genres.find((obj: GenresType) => {
+    const genre = data.genres.find((obj: GenreType) => {
       return String(obj.id) === id;
     });
 
@@ -105,8 +105,9 @@ export async function getGenreMovies(id: string, type: string, page: number) {
     );
     const data = await res.json();
     return data;
-  } catch (error) {
-    console.error(`Error fetching genre movies: ${error}`);
+  } catch (e: any) {
+    console.error(`Error fetching genre movies: ${e}`);
+    throw new Error(e);
   }
 }
 
@@ -122,7 +123,8 @@ export async function getMovieDetails(
     const data = await res.json();
     console.log(data);
     return data;
-  } catch (error) {
-    console.error(`Error fetching movie details: ${error}`);
+  } catch (e: any) {
+    console.error(`Error fetching movie details: ${e}`);
+    throw new Error(e);
   }
 }

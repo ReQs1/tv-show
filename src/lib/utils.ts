@@ -1,18 +1,18 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { GenresType } from "./types";
+import { GenreType } from "./types";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
 export const mergeGenres = (
-  movieGenres: GenresType[] | undefined,
-  tvShowGenres: GenresType[] | undefined
+  movieGenres: GenreType[] | undefined,
+  tvShowGenres: GenreType[] | undefined
 ) => {
   if (!movieGenres || !tvShowGenres) return [];
 
-  const mergedGenres: GenresType[] = [
+  const mergedGenres: GenreType[] = [
     ...movieGenres.map((genre) => ({ ...genre, type: "movie" })),
     ...tvShowGenres
       .map((genre) => ({ ...genre, type: "tv" }))

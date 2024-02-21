@@ -16,25 +16,35 @@ import GenresList from "@/components/GenresList";
 import MoviesCarousel from "@/components/MoviesCarousel";
 
 function HomePage() {
-  const { data: trendingShows, isLoading: trendingShowsLoading } = useQuery({
+  const {
+    data: trendingShows,
+    isLoading: trendingShowsLoading,
+    error: trendingShowsError,
+  } = useQuery({
     queryKey: "trendingShows",
     queryFn: () => getTrending("tv"),
   });
 
-  const { data: trendingMovies, isLoading: trendingMoviesLoading } = useQuery({
+  const {
+    data: trendingMovies,
+    isLoading: trendingMoviesLoading,
+    error: trendingMoviesError,
+  } = useQuery({
     queryKey: "trendingMovies",
     queryFn: () => getTrending("movie"),
   });
 
-  const { data: nowPlayingMovies, isLoading: nowPlayingLoading } = useQuery(
-    "nowPlaying",
-    getNowPlayingMovies
-  );
+  const {
+    data: nowPlayingMovies,
+    isLoading: nowPlayingLoading,
+    error: nowPlayingError,
+  } = useQuery("nowPlaying", getNowPlayingMovies);
 
-  const { data: airingShows, isLoading: airingShowsLoading } = useQuery(
-    "airingShows",
-    getAiringShows
-  );
+  const {
+    data: airingShows,
+    isLoading: airingShowsLoading,
+    error: airingShowsError,
+  } = useQuery("airingShows", getAiringShows);
 
   const LottieRef = useRef<LottieRefCurrentProps>(null);
   LottieRef.current?.setSpeed(0.8);
@@ -80,6 +90,7 @@ function HomePage() {
           title="Trending Shows"
           description="Shows with most reactions in the last 3 days"
           isLoading={trendingShowsLoading}
+          error={trendingShowsError}
         />
       )}
 
@@ -89,6 +100,7 @@ function HomePage() {
           title="Trending Movies"
           description="Movies with most reactions in the last 3 days"
           isLoading={trendingMoviesLoading}
+          error={trendingMoviesError}
         />
       )}
 
@@ -98,6 +110,7 @@ function HomePage() {
           title="Now Playing Movies"
           description="Movies that are currently in theatres"
           isLoading={nowPlayingLoading}
+          error={nowPlayingError}
         />
       )}
 
@@ -107,6 +120,7 @@ function HomePage() {
           title="Airing Today"
           description="TV shows airing today"
           isLoading={airingShowsLoading}
+          error={airingShowsError}
         />
       )}
 

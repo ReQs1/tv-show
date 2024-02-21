@@ -40,7 +40,7 @@ export type ShowType = {
 type MainType = {
   adult: boolean;
   backdrop_path: string;
-  genres: GenresType[];
+  genres: GenreType[];
   homepage: string;
   id: number;
   original_language: string;
@@ -131,7 +131,7 @@ export type ShowDetails = MainType & {
   type: string;
 };
 
-export type GenresType = {
+export type GenreType = {
   id: number;
   name: string;
   type?: string;
