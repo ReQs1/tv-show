@@ -1,22 +1,23 @@
 import { Link } from "react-router-dom";
 import { MovieType, ShowType } from "@/lib/types";
-import { formatTime, truncate } from "@/lib/utils";
+import { cn, formatTime, truncate } from "@/lib/utils";
 import { useQuery } from "react-query";
 import { getMovieDetails } from "@/services/themoviedbAPI";
 
 type CardProps = {
-  movie: ShowType | MovieType;
+  entry: ShowType | MovieType;
   lastRef?: (node: HTMLDivElement | null) => void;
-  type?: string;
+  type: string;
   currentGenre?: string;
 };
 
-function InfiniteScrollCard({ movie, lastRef, type, currentGenre }: CardProps) {
+function InfiniteScrollCard({ entry, lastRef, type, currentGenre }: CardProps) {
+  const click = () => console.log(entry);
   const { data, isLoading, error } = useQuery({
-    queryKey: ["infiniteScrollDetails", movie.id, type],
+    queryKey: ["infiniteScrollDetails", entry.id, type],
     queryFn: () => {
       if (type) {
-        return getMovieDetails(movie.id, type);
+        return getMovieDetails(entry.id, type);
       }
     },
   });
@@ -39,40 +40,70 @@ function InfiniteScrollCard({ movie, lastRef, type, currentGenre }: CardProps) {
   }
 
   return (
-    <div className="flex flex-col flex-1 basis-48" ref={lastRef}>
-      <Link to={`/${type}/${movie.id}`}>
+    <div
+      className="flex flex-col flex-1 basis-48 lg:max-w-[200px]"
+      ref={lastRef}
+      onClick={click}
+    >
+      <Link to={`/${type}/${entry.id}`}>
         <img
           loading="lazy"
-          className="w-full md:h-[288px] rounded-lg"
-          src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-          alt={movie.title || ("name" in movie ? movie.name : "")}
+          className={cn(
+            "w-full md:h-[288px] rounded-lg shadow-[0_3px_10px_rgb(0,0,0,0.2)]",
+            {
+              ["md:h-[288px]"]: entry.poster_path,
+              ["md:h-full"]: !entry.poster_path,
+            }
+          )}
+          src={
+            entry.poster_path
+              ? `https://image.tmdb.org/t/p/w500${entry.poster_path}`
+              : "https://placehold.co/500x750?text=No+Movie+Poster"
+          }
+          // src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+          alt={entry.title || ("name" in entry ? entry.name : "")}
         />
       </Link>
+
       <div className="flex flex-col justify-between flex-1 gap-2">
         <h3 className="mt-3 text-2xl font-semibold md:text-lg">
-          {truncate(movie.title) ||
-            ("name" in movie ? truncate(movie.name) : "")}
+          {truncate(entry.title) ||
+            ("name" in entry ? truncate(entry.name) : "")}
         </h3>
-        {!(currentGenre === "") ? (
-          <ul className="flex gap-2 text-lg md:text-base">
-            <li>{movieDetail}</li>
-            {!error && <li>•</li>}
+
+        {!currentGenre ? (
+          <ul className="flex items-center gap-2 text-lg md:text-base">
             <li>
-              {movie.release_date?.slice(0, 4) ||
-                ("first_air_date" in movie
-                  ? movie.first_air_date?.slice(0, 4)
+              <img
+                src={`/${type}Icon.svg`}
+                alt={`${type} Icon`}
+                className="w-5"
+              />
+            </li>
+            <li>•</li>
+            <li>{movieDetail}</li>
+            <li>•</li>
+            <li>
+              {entry.release_date?.slice(0, 4) ||
+                ("first_air_date" in entry
+                  ? entry.first_air_date?.slice(0, 4)
                   : "")}
             </li>
           </ul>
         ) : (
-          <p>
-            {movie.release_date?.slice(0, 4) ||
-              ("first_air_date" in movie
-                ? movie.first_air_date?.slice(0, 4)
-                : "")}
-          </p>
+          <ul className="flex gap-2 text-lg md:text-base">
+            <li>{movieDetail}</li>
+            {!error && <li>•</li>}
+            <li>
+              {entry.release_date?.slice(0, 4) ||
+                ("first_air_date" in entry
+                  ? entry.first_air_date?.slice(0, 4)
+                  : "")}
+            </li>
+          </ul>
         )}
-        {!(currentGenre === "") && (
+
+        {currentGenre && (
           <p className="flex items-center gap-3 text-base font-medium uppercase md:text-sm">
             <img
               src={`/${type}Icon.svg`}

@@ -48,7 +48,7 @@ function NavLinks() {
               <span className="sr-only">Close mobile navbar</span>
             </button>
             <Logo />
-            <Navigation />
+            <Navigation setIsOpen={setIsOpen} />
           </motion.div>
         )}
       </AnimatePresence>

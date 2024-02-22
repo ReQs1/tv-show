@@ -127,3 +127,17 @@ export async function getMovieDetails(
     throw new Error(e);
   }
 }
+
+export async function discoverMovies(type: string, page: number) {
+  try {
+    const res = await fetch(
+      `${BASE_URL}/${VERSION}/discover/${type}?include_adult=false&include_video=false&language=en-US&page=${page}&sort_by=popularity.desc`,
+      options
+    );
+    const data = await res.json();
+    return data;
+  } catch (e: any) {
+    console.error(`Error fetching discover movies: ${e}`);
+    throw new Error(e);
+  }
+}

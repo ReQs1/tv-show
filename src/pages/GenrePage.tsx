@@ -127,7 +127,7 @@ function GenrePage() {
               .map((_, i) => {
                 return (
                   <div
-                    className="flex flex-col flex-1 space-y-2 basis-48"
+                    className="flex flex-col flex-1 space-y-2 basis-48 lg:max-w-[200px]"
                     key={i}
                   >
                     <Skeleton className="h-[288px] w-[100%]" />
@@ -141,13 +141,13 @@ function GenrePage() {
           )}
 
           {isSuccess &&
-            uniqueData.map((movie: MovieType | ShowType, i: number) => {
+            uniqueData.map((entry: MovieType | ShowType, i: number) => {
               if (i + 1 === uniqueData.length) {
                 return (
                   <InfiniteScrollCard
+                    entry={entry}
                     lastRef={ref}
-                    movie={movie}
-                    key={movie.id}
+                    key={entry.id}
                     type={type}
                     currentGenre={genre && genre.name}
                   />
@@ -155,8 +155,8 @@ function GenrePage() {
               }
               return (
                 <InfiniteScrollCard
-                  movie={movie}
-                  key={movie.id}
+                  entry={entry}
+                  key={entry.id}
                   type={type}
                   currentGenre={genre && genre.name}
                 />
@@ -169,7 +169,7 @@ function GenrePage() {
               .map((_, i) => {
                 return (
                   <div
-                    className="flex flex-col flex-1 space-y-2 basis-48"
+                    className="flex flex-col flex-1 space-y-2 basis-48 lg:max-w-[200px]"
                     key={i}
                   >
                     <Skeleton className="h-[288px] w-[100%]" />
@@ -181,9 +181,10 @@ function GenrePage() {
 
         {isSuccess && !hasNextPage && (
           <div className="flex justify-center my-8">
-            <p className="text-lg font-semibold">No more movies to show</p>
+            <p className="text-lg font-semibold">Nothing more to show</p>
           </div>
         )}
+
         {isFetchingNextPage && (
           <div className="flex justify-center my-8">
             <div className="w-6 h-6 border-t-2 border-b-2 border-yellow-400 rounded-full animate-spin" />
