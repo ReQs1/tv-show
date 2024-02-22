@@ -72,7 +72,7 @@ function InfiniteScrollCard({ entry, lastRef, type, currentGenre }: CardProps) {
         </h3>
 
         {!currentGenre ? (
-          <ul className="flex items-center gap-2 text-lg md:text-base">
+          <ul className="flex items-center gap-1 text-lg md:text-base">
             <li>
               <img
                 src={`/${type}Icon.svg`}
