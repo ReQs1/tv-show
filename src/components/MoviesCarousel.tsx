@@ -1,3 +1,6 @@
+import { useRef } from "react";
+import { useInView } from "framer-motion";
+
 import {
   Carousel,
   CarouselContent,
@@ -7,27 +10,32 @@ import {
 } from "./carousel";
 import CarouselCard from "./CarouselCard";
 import type { ShowType, MovieType } from "@/lib/types";
-import { Skeleton } from "./skeleton";
 
 type MoviesCarouselProps = {
   data: MovieType[] | ShowType[];
   title: string;
   description: string;
-  isLoading: boolean;
 };
 
-function MoviesCarousel({
-  data,
-  title,
-  description,
-  isLoading,
-}: MoviesCarouselProps) {
+function MoviesCarousel({ data, title, description }: MoviesCarouselProps) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+
   return (
-    <section className="mb-16">
+    <section
+      className="mb-16"
+      ref={ref}
+      style={{
+        transform: isInView ? "none" : "translateY(30px)",
+        opacity: isInView ? 1 : 0,
+        transition: "transform 0.8s, opacity 0.8s",
+      }}
+    >
       <div className="px-4 mb-8 space-y-4 md:px-10">
         <h2 className="text-3xl font-bold md:text-4xl">{title}</h2>
         <p className="text-stone-600">{description}</p>
       </div>
+
       {data && (
         <Carousel
           opts={{
@@ -38,15 +46,7 @@ function MoviesCarousel({
           }}
         >
           <CarouselContent className="-ml-4">
-            {isLoading &&
-              Array(10)
-                .fill(0)
-                .map((_, i) => (
-                  <CarouselItem key={i} className="pl-4 basis-auto">
-                    <Skeleton className="w-40 h-52 md:h-64 md:w-52" />
-                  </CarouselItem>
-                ))}
-            {!isLoading &&
+            {data &&
               data.map((entry: MovieType | ShowType) => (
                 <CarouselItem key={entry.id} className="pl-4 basis-auto">
                   <CarouselCard movie={entry} />

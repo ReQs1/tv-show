@@ -14,6 +14,7 @@ import { Bell, CheckCircle2, Eye, Search } from "lucide-react";
 
 import GenresList from "@/components/GenresList";
 import MoviesCarousel from "@/components/MoviesCarousel";
+import LoadingCarousel from "@/components/LoadingCarousel";
 
 function HomePage() {
   const {
@@ -84,6 +85,10 @@ function HomePage() {
         </div>
       </div>
 
+      {/* Trending Shows Section  */}
+
+      {trendingShowsLoading && <LoadingCarousel />}
+
       {trendingShowsError && (
         <p className="my-10 text-center">Error fetching trending shows</p>
       )}
@@ -93,9 +98,12 @@ function HomePage() {
           data={trendingShows}
           title="Trending Shows"
           description="Shows with most reactions in the last 3 days"
-          isLoading={trendingShowsLoading}
         />
       )}
+
+      {/* Trending Movies Section  */}
+
+      {trendingMoviesLoading && <LoadingCarousel />}
 
       {trendingMoviesError && (
         <p className="my-10 text-center">Error fetching trending Movies</p>
@@ -106,9 +114,12 @@ function HomePage() {
           data={trendingMovies}
           title="Trending Movies"
           description="Movies with most reactions in the last 3 days"
-          isLoading={trendingMoviesLoading}
         />
       )}
+
+      {/* Now Playing Movies Section  */}
+
+      {nowPlayingLoading && <LoadingCarousel />}
 
       {nowPlayingError && (
         <p className="my-10 text-center">Error fetching Now Playing Movies</p>
@@ -119,9 +130,12 @@ function HomePage() {
           data={nowPlayingMovies}
           title="Now Playing Movies"
           description="Movies that are currently in theatres"
-          isLoading={nowPlayingLoading}
         />
       )}
+
+      {/* Airing Shows Section  */}
+
+      {airingShowsLoading && <LoadingCarousel />}
 
       {airingShowsError && (
         <p className="my-10 text-center">Error fetching Airing Shows</p>
@@ -132,7 +146,6 @@ function HomePage() {
           data={airingShows}
           title="Airing Today"
           description="TV shows airing today"
-          isLoading={airingShowsLoading}
         />
       )}
 

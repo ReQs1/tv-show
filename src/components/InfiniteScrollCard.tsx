@@ -12,7 +12,6 @@ type CardProps = {
 };
 
 function InfiniteScrollCard({ entry, lastRef, type, currentGenre }: CardProps) {
-  const click = () => console.log(entry);
   const { data, isLoading, error } = useQuery({
     queryKey: ["infiniteScrollDetails", entry.id, type],
     queryFn: () => {
@@ -43,7 +42,6 @@ function InfiniteScrollCard({ entry, lastRef, type, currentGenre }: CardProps) {
     <div
       className="flex flex-col flex-1 basis-48 lg:max-w-[200px]"
       ref={lastRef}
-      onClick={click}
     >
       <Link to={`/${type}/${entry.id}`}>
         <img
