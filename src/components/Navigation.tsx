@@ -17,11 +17,25 @@ function Navigation({ setIsOpen }: NavigationProps) {
             if (setIsOpen) setIsOpen(false);
           }}
         >
-          <NavLink to="/tv">Shows</NavLink>
+          <NavLink
+            to="/tv"
+            onClick={() => {
+              if (setIsOpen) setIsOpen(false);
+            }}
+          >
+            Shows
+          </NavLink>
           <span className="sr-only">Link to Tv Shows</span>
         </li>
         <li>
-          <NavLink to="/movie">Movies</NavLink>
+          <NavLink
+            to="/movie"
+            onClick={() => {
+              if (setIsOpen) setIsOpen(false);
+            }}
+          >
+            Movies
+          </NavLink>
           <span className="sr-only">Link to Movies</span>
         </li>
       </ul>

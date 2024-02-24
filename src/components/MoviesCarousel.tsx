@@ -1,5 +1,4 @@
-import { useRef } from "react";
-import { useInView } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 
 import {
   Carousel,
@@ -10,6 +9,7 @@ import {
 } from "./carousel";
 import CarouselCard from "./CarouselCard";
 import type { ShowType, MovieType } from "@/lib/types";
+import { cn } from "@/lib/utils";
 
 type MoviesCarouselProps = {
   data: MovieType[] | ShowType[];
@@ -18,19 +18,13 @@ type MoviesCarouselProps = {
 };
 
 function MoviesCarousel({ data, title, description }: MoviesCarouselProps) {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true });
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    threshold: 0.4,
+  });
 
   return (
-    <section
-      className="mb-16"
-      ref={ref}
-      style={{
-        transform: isInView ? "none" : "translateY(30px)",
-        opacity: isInView ? 1 : 0,
-        transition: "transform 0.8s, opacity 0.8s",
-      }}
-    >
+    <section className="mb-16 " ref={ref}>
       <div className="px-4 mb-8 space-y-4 md:px-10">
         <h2 className="text-3xl font-bold md:text-4xl">{title}</h2>
         <p className="text-stone-600">{description}</p>
@@ -38,6 +32,10 @@ function MoviesCarousel({ data, title, description }: MoviesCarouselProps) {
 
       {data && (
         <Carousel
+          className={cn("transition-transform duration-1000", {
+            ["translate-y-10"]: !inView,
+            ["translate-y-0"]: inView,
+          })}
           opts={{
             loop: true,
             align: "start",
@@ -53,8 +51,8 @@ function MoviesCarousel({ data, title, description }: MoviesCarouselProps) {
                 </CarouselItem>
               ))}
           </CarouselContent>
-          <CarouselPrevious className="absolute left-0 hidden w-10 h-full text-white border-none rounded-none md:block md:w-20 top-1/2 bg-black/60 focus:bg-black/70 hover:bg-black/60 hover:text-white" />
-          <CarouselNext className="absolute right-0 hidden w-10 h-full text-white border-none rounded-none md:block md:w-20 top-1/2 bg-black/60 focus:bg-black/70 hover:bg-black/60 hover:text-white" />
+          <CarouselPrevious className="left-0 hidden w-10 h-full text-white border-none rounded-none md:flex md:w-20 top-1/2 bg-black/60 focus:bg-black/70 hover:bg-black/60 hover:text-white" />
+          <CarouselNext className="right-0 hidden w-10 h-full text-white border-none rounded-none md:flex md:w-20 top-1/2 bg-black/60 focus:bg-black/70 hover:bg-black/60 hover:text-white" />
         </Carousel>
       )}
     </section>
