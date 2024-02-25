@@ -1,8 +1,17 @@
 import { NavLink } from "react-router-dom";
 
-function Logo() {
+type Props = {
+  setIsOpen?: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+function Logo({ setIsOpen }: Props) {
   return (
-    <NavLink to="/">
+    <NavLink
+      to="/"
+      onClick={() => {
+        if (setIsOpen) setIsOpen(false);
+      }}
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="220"

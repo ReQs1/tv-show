@@ -60,7 +60,11 @@ function MoviePage() {
             <div className="max-w-36 sm:max-w-48 lg:max-w-56 xl:max-w-72">
               <img
                 className="rounded-lg lg:w-full"
-                src={`https://image.tmdb.org/t/p/w500${poster_path}`}
+                src={
+                  poster_path
+                    ? `https://image.tmdb.org/t/p/w500${poster_path}`
+                    : "https://placehold.co/500x750?text=No+Movie+Poster"
+                }
                 alt={`${truncate(name) || truncate(title)}`}
                 loading="lazy"
               />
@@ -73,7 +77,7 @@ function MoviePage() {
                 {Array(5)
                   .fill(0)
                   .map((_, i) => {
-                    if (i < Math.ceil(data.vote_average / 2))
+                    if (i + 1 < Math.ceil(data.vote_average) / 2)
                       return (
                         <Star
                           className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10"
