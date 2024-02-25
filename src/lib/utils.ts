@@ -1,6 +1,6 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { GenreType } from "./types";
+import { GenreType, MovieType, ShowType } from "./types";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -50,4 +50,22 @@ export function formatTime(minutes: number) {
   }
 
   return formattedTime !== "" ? formattedTime : "0min";
+}
+
+export function getUniqueData(data: any = []) {
+  if (data.length === 0) return [];
+  const uniqueData = data.pages.reduce((acc: any, page: any) => {
+    if (page) {
+      const uniqueMovies = page.results.filter(
+        (movie: MovieType | ShowType) => {
+          return !acc.find(
+            (accMovie: MovieType | ShowType) => accMovie.id === movie.id
+          );
+        }
+      );
+      return [...acc, ...uniqueMovies];
+    }
+    return acc;
+  }, []);
+  return uniqueData;
 }

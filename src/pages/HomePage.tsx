@@ -17,6 +17,9 @@ import MoviesCarousel from "@/components/MoviesCarousel";
 import LoadingCarousel from "@/components/LoadingCarousel";
 
 function HomePage() {
+  const LottieRef = useRef<LottieRefCurrentProps>(null);
+  LottieRef.current?.setSpeed(0.8);
+
   const {
     data: trendingShows,
     isLoading: trendingShowsLoading,
@@ -46,9 +49,6 @@ function HomePage() {
     isLoading: airingShowsLoading,
     error: airingShowsError,
   } = useQuery("airingShows", getAiringShows);
-
-  const LottieRef = useRef<LottieRefCurrentProps>(null);
-  LottieRef.current?.setSpeed(0.8);
 
   return (
     <>

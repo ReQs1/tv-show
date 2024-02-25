@@ -5,9 +5,10 @@ import { useInView } from "react-intersection-observer";
 
 import InfiniteScrollCard from "@/components/InfiniteScrollCard";
 import { Skeleton } from "@/components/skeleton";
+import ScrollToTopBtn from "@/components/ScrollToTopBtn";
 import { discoverMovies } from "@/services/themoviedbAPI";
 import { MovieType, ShowType } from "@/lib/types";
-import ScrollToTopBtn from "@/components/ScrollToTopBtn";
+import { getUniqueData } from "@/lib/utils";
 import useScrollToTopOnMount from "@/hooks/useScrollToTopOnMount";
 
 function DiscoverPage() {
@@ -35,21 +36,7 @@ function DiscoverPage() {
     },
   });
 
-  const uniqueData =
-    data &&
-    data.pages.reduce((acc: any, page: any) => {
-      if (page) {
-        const uniqueMovies = page.results.filter(
-          (movie: MovieType | ShowType) => {
-            return !acc.find(
-              (accMovie: MovieType | ShowType) => accMovie.id === movie.id
-            );
-          }
-        );
-        return [...acc, ...uniqueMovies];
-      }
-      return acc;
-    }, []);
+  const uniqueData = getUniqueData(data);
 
   useScrollToTopOnMount();
 

@@ -9,7 +9,7 @@ import ScrollToTopBtn from "@/components/ScrollToTopBtn";
 
 import { getGenreById, getGenreMovies } from "@/services/themoviedbAPI";
 import { MovieType, ShowType } from "@/lib/types";
-import { cn } from "@/lib/utils";
+import { cn, getUniqueData } from "@/lib/utils";
 import useScrollToTopOnMount from "@/hooks/useScrollToTopOnMount";
 
 function GenrePage() {
@@ -57,21 +57,7 @@ function GenrePage() {
     },
   });
 
-  const uniqueData =
-    data &&
-    data.pages.reduce((acc: any, page: any) => {
-      if (page) {
-        const uniqueMovies = page.results.filter(
-          (movie: MovieType | ShowType) => {
-            return !acc.find(
-              (accMovie: MovieType | ShowType) => accMovie.id === movie.id
-            );
-          }
-        );
-        return [...acc, ...uniqueMovies];
-      }
-      return acc;
-    }, []);
+  const uniqueData = getUniqueData(data);
 
   useScrollToTopOnMount();
 
@@ -118,7 +104,6 @@ function GenrePage() {
           </Link>
         </div>
       </div>
-      {/* */}
       <section>
         <div className="flex flex-wrap md:gap-6 gap-9">
           {isLoading &&
