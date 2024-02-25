@@ -152,7 +152,7 @@ export async function getMovieDetails(id: string) {
     return data;
   } catch (e: any) {
     console.error(`Error fetching movie details: ${e}`);
-    throw new Error(e.message);
+    throw new Error(e);
   }
 }
 

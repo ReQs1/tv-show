@@ -40,10 +40,10 @@ function MoviePage() {
     overview,
   } = data;
 
-  if (error)
+  if (error instanceof Error)
     return (
-      <div>
-        <p>There was an error while fetching data</p>
+      <div className="flex items-center justify-center">
+        <p>{error.message}</p>
       </div>
     );
 
