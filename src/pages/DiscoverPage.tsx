@@ -8,6 +8,7 @@ import { Skeleton } from "@/components/skeleton";
 import { discoverMovies } from "@/services/themoviedbAPI";
 import { MovieType, ShowType } from "@/lib/types";
 import ScrollToTopBtn from "@/components/ScrollToTopBtn";
+import useScrollToTopOnMount from "@/hooks/useScrollToTopOnMount";
 
 function DiscoverPage() {
   const { type = "" } = useParams();
@@ -36,7 +37,7 @@ function DiscoverPage() {
 
   const uniqueData =
     data &&
-    data.pages.reduce((acc, page) => {
+    data.pages.reduce((acc: any, page: any) => {
       if (page) {
         const uniqueMovies = page.results.filter(
           (movie: MovieType | ShowType) => {
@@ -50,9 +51,7 @@ function DiscoverPage() {
       return acc;
     }, []);
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+  useScrollToTopOnMount();
 
   useEffect(() => {
     if (inView && hasNextPage) {

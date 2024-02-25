@@ -131,6 +131,66 @@ export type ShowDetails = MainType & {
   type: string;
 };
 
+export type CastType = {
+  adult: boolean;
+  cast_id: number;
+  character: string;
+  credit_id: string;
+  gender: number;
+  id: number;
+  known_for_department: string;
+  name: string;
+  order: number;
+  original_name: string;
+  popularity: number;
+  profile_path: string;
+};
+
+export type SeasonType = {
+  air_date: string;
+  episodes: {
+    air_date: string;
+    crew: any[];
+    episode_number: number;
+    episode_type: string;
+    guest_stars: any[];
+    id: number;
+    name: string;
+    overview: string;
+    production_code: string;
+    runtime: number;
+    season_number: number;
+    show_id: number;
+    still_path: string;
+    vote_average: number;
+    vote_count: number;
+  };
+  name: string;
+  overview: string;
+  poster_path: string;
+  season_number: number;
+  vote_average: number;
+  _id: number;
+};
+
+export type EpisodeType = {
+  air_date: string;
+  crew: any[];
+  episode_number: number;
+  episode_type: string;
+  guest_stars: any[];
+  id: number;
+  name: string;
+  overview: string;
+  production_code: string;
+  runtime: number;
+  season_number: number;
+  show_id: number;
+  still_path: string;
+  vote_average: number;
+  vote_count: number;
+};
+
 export type GenreType = {
   id: number;
   name: string;

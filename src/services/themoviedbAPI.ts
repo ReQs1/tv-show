@@ -111,7 +111,7 @@ export async function getGenreMovies(id: string, type: string, page: number) {
   }
 }
 
-export async function getMovieDetails(
+export async function getBasicMovieInfo(
   id: number,
   type: string
 ): Promise<MovieDetails | ShowDetails | undefined> {
@@ -138,6 +138,34 @@ export async function discoverMovies(type: string, page: number) {
     return data;
   } catch (e: any) {
     console.error(`Error fetching discover movies: ${e}`);
+    throw new Error(e);
+  }
+}
+
+export async function getMovieDetails(id: string) {
+  try {
+    const res = await fetch(
+      `${BASE_URL}/${VERSION}/movie/${id}?append_to_response=videos%2Cwatch%2Fproviders%2Creviews%2Csimilar%2Ccredits%2Cimages&include_image_language=en,null&language=en-US`,
+      options
+    );
+    const data = await res.json();
+    return data;
+  } catch (e: any) {
+    console.error(`Error fetching movie details: ${e}`);
+    throw new Error(e.message);
+  }
+}
+
+export async function getShowDetails(id: string) {
+  try {
+    const res = await fetch(
+      `${BASE_URL}/${VERSION}/tv/${id}?append_to_response=videos%2Cwatch%2Fproviders%2Creviews%2Csimilar%2Ccredits%2Cseason%2F1%2Cseason%2F2%2Cseason%2F3%2Cimages&include_image_language=en,null&language=en-US`,
+      options
+    );
+    const data = await res.json();
+    return data;
+  } catch (e: any) {
+    console.error(`Error fetching show details: ${e}`);
     throw new Error(e);
   }
 }

@@ -87,7 +87,7 @@ function HomePage() {
 
       {/* Trending Shows Section  */}
 
-      {trendingShowsLoading && <LoadingCarousel />}
+      {trendingShowsLoading && <LoadingCarousel kind="homepage" />}
 
       {trendingShowsError && (
         <p className="my-10 text-center">Error fetching trending shows</p>
@@ -98,12 +98,13 @@ function HomePage() {
           data={trendingShows}
           title="Trending Shows"
           description="Shows with most reactions in the last 3 days"
+          type="tv"
         />
       )}
 
       {/* Trending Movies Section  */}
 
-      {trendingMoviesLoading && <LoadingCarousel />}
+      {trendingMoviesLoading && <LoadingCarousel kind="homepage" />}
 
       {trendingMoviesError && (
         <p className="my-10 text-center">Error fetching trending Movies</p>
@@ -114,12 +115,13 @@ function HomePage() {
           data={trendingMovies}
           title="Trending Movies"
           description="Movies with most reactions in the last 3 days"
+          type="movie"
         />
       )}
 
       {/* Now Playing Movies Section  */}
 
-      {nowPlayingLoading && <LoadingCarousel />}
+      {nowPlayingLoading && <LoadingCarousel kind="homepage" />}
 
       {nowPlayingError && (
         <p className="my-10 text-center">Error fetching Now Playing Movies</p>
@@ -130,12 +132,13 @@ function HomePage() {
           data={nowPlayingMovies}
           title="Now Playing Movies"
           description="Movies that are currently in theatres"
+          type="movie"
         />
       )}
 
       {/* Airing Shows Section  */}
 
-      {airingShowsLoading && <LoadingCarousel />}
+      {airingShowsLoading && <LoadingCarousel kind="homepage" />}
 
       {airingShowsError && (
         <p className="my-10 text-center">Error fetching Airing Shows</p>
@@ -146,6 +149,7 @@ function HomePage() {
           data={airingShows}
           title="Airing Today"
           description="TV shows airing today"
+          type="tv"
         />
       )}
 

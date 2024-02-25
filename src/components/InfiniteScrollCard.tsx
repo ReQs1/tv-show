@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { MovieType, ShowType } from "@/lib/types";
 import { cn, formatTime, truncate } from "@/lib/utils";
 import { useQuery } from "react-query";
-import { getMovieDetails } from "@/services/themoviedbAPI";
+import { getBasicMovieInfo } from "@/services/themoviedbAPI";
 
 type CardProps = {
   entry: ShowType | MovieType;
@@ -14,7 +14,7 @@ type CardProps = {
 function InfiniteScrollCard({ entry, lastRef, type, currentGenre }: CardProps) {
   const { data, isLoading, error } = useQuery({
     queryKey: ["infiniteScrollDetails", entry.id, type],
-    queryFn: () => getMovieDetails(entry.id, type),
+    queryFn: () => getBasicMovieInfo(entry.id, type),
     enabled: type ? true : false,
   });
 

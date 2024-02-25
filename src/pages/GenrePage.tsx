@@ -10,11 +10,13 @@ import ScrollToTopBtn from "@/components/ScrollToTopBtn";
 import { getGenreById, getGenreMovies } from "@/services/themoviedbAPI";
 import { MovieType, ShowType } from "@/lib/types";
 import { cn } from "@/lib/utils";
+import useScrollToTopOnMount from "@/hooks/useScrollToTopOnMount";
 
 function GenrePage() {
   const { ref, inView } = useInView({
     threshold: 1,
   });
+
   const [searchParams] = useSearchParams();
   const { genreId = "" } = useParams();
   const type = searchParams.get("view") || "";
@@ -57,7 +59,7 @@ function GenrePage() {
 
   const uniqueData =
     data &&
-    data.pages.reduce((acc, page) => {
+    data.pages.reduce((acc: any, page: any) => {
       if (page) {
         const uniqueMovies = page.results.filter(
           (movie: MovieType | ShowType) => {
@@ -71,9 +73,7 @@ function GenrePage() {
       return acc;
     }, []);
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+  useScrollToTopOnMount();
 
   useEffect(() => {
     if (inView && hasNextPage) {

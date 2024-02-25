@@ -15,9 +15,15 @@ type MoviesCarouselProps = {
   data: MovieType[] | ShowType[];
   title: string;
   description: string;
+  type?: "movie" | "tv";
 };
 
-function MoviesCarousel({ data, title, description }: MoviesCarouselProps) {
+function MoviesCarousel({
+  data,
+  title,
+  description,
+  type,
+}: MoviesCarouselProps) {
   const { ref, inView } = useInView({
     triggerOnce: true,
     threshold: 0.4,
@@ -47,7 +53,7 @@ function MoviesCarousel({ data, title, description }: MoviesCarouselProps) {
             {data &&
               data.map((entry: MovieType | ShowType) => (
                 <CarouselItem key={entry.id} className="pl-4 basis-auto">
-                  <CarouselCard movie={entry} />
+                  <CarouselCard entry={entry} type={type} />
                 </CarouselItem>
               ))}
           </CarouselContent>
