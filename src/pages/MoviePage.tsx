@@ -132,14 +132,14 @@ function MoviePage() {
 
             <div className="hidden xl:block">
               <div className="flex flex-col items-center">
-                <div className="space-y-1 text-center">
+                <div className="py-2 space-y-1 text-center bg-black rounded-md w-72">
                   <p className="text-xl">Status</p>
                   <p className="text-2xl font-bold">{status}</p>
                 </div>
 
                 {/* popularity  */}
 
-                <div className="mt-8 space-y-1 text-center">
+                <div className="py-2 mt-8 space-y-1 text-center bg-black rounded-md w-72">
                   <p className="text-xl">TheMovieDB Popularity</p>
                   <p className="text-2xl font-bold">{Math.floor(popularity)}</p>
                 </div>
@@ -170,14 +170,14 @@ function MoviePage() {
 
           <div className="flex flex-col items-center mt-10 xl:hidden">
             <div className="flex flex-col items-center gap-2 sm:flex-row">
-              <div className="px-4 py-3 space-y-2 text-center text-white bg-black rounded-md ">
+              <div className="w-48 px-4 py-3 space-y-2 flex flex-col justify-center items-center text-white bg-black rounded-md h-[108px]">
                 <p>Status</p>
                 <p className="text-lg font-bold">{status}</p>
               </div>
 
               {/* popularity  */}
 
-              <div className="px-4 py-3 space-y-2 text-center text-white bg-black rounded-md ">
+              <div className="w-48 px-4 py-3 space-y-2 text-center text-white bg-black rounded-md h-[108px]">
                 <p>TheMovieDB Popularity</p>
                 <p className="text-lg font-bold">{Math.floor(popularity)}</p>
               </div>
