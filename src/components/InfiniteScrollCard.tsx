@@ -15,7 +15,7 @@ function InfiniteScrollCard({ entry, lastRef, type, currentGenre }: CardProps) {
   const { data, isLoading, error } = useQuery({
     queryKey: ["infiniteScrollDetails", entry.id, type],
     queryFn: () => getBasicMovieInfo(entry.id, type),
-    enabled: type ? true : false,
+    enabled: Boolean(type),
   });
 
   let movieDetail: string | number;
