@@ -55,9 +55,9 @@ function MoviePage() {
   return (
     <div>
       <header
-        className="px-4 py-8 text-white bg-[top_center] bg-no-repeat bg-cover shadow-lg sm:px-8 md:px-10 xl:px-12 md:py-12 lg:py-16 xl:py-20 "
+        className="px-4 py-8 text-white bg-[top_center] bg-no-repeat bg-cover shadow-lg sm:px-8 md:px-10 xl:px-12 md:py-12 lg:py-16 xl:py-20 bg-fixed"
         style={{
-          backgroundImage: `linear-gradient(180deg, rgba(0,212,255,0) 0%, #000000 100%), url('https://image.tmdb.org/t/p/original${backdrop_path}')`,
+          backgroundImage: `linear-gradient(180deg, #0000005a 0%, #000000 100%), url('https://image.tmdb.org/t/p/original${backdrop_path}')`,
         }}
       >
         {/* poster */}

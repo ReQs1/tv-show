@@ -7,7 +7,7 @@ type Props = {
 
 function StatusTrailerComponent({ popularity, status }: Props) {
   return (
-    <div className="flex flex-col items-center mt-10 ">
+    <div className="flex flex-col items-center mt-10 xl:mt-0 xl:ml-10">
       <div className="flex flex-col items-center gap-6 sm:flex-row xl:flex-col">
         <div className="w-72 sm:w-60 xl:w-72 px-4 py-3 space-y-2 flex flex-col justify-center items-center text-white bg-black rounded-md h-[108px]">
           <p>Status</p>

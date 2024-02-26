@@ -50,12 +50,11 @@ function MoviesCarousel({
           }}
         >
           <CarouselContent className="-ml-4">
-            {data &&
-              data.map((entry: MovieType | ShowType) => (
-                <CarouselItem key={entry.id} className="pl-4 basis-auto">
-                  <CarouselCard entry={entry} type={type} />
-                </CarouselItem>
-              ))}
+            {data.map((entry: MovieType | ShowType) => (
+              <CarouselItem key={entry.id} className="pl-4 basis-auto">
+                <CarouselCard entry={entry} type={type} />
+              </CarouselItem>
+            ))}
           </CarouselContent>
           <CarouselPrevious className="left-0 hidden w-10 h-full text-white border-none rounded-none md:flex md:w-20 top-1/2 bg-black/60 focus:bg-black/70 hover:bg-black/60 hover:text-white" />
           <CarouselNext className="right-0 hidden w-10 h-full text-white border-none rounded-none md:flex md:w-20 top-1/2 bg-black/60 focus:bg-black/70 hover:bg-black/60 hover:text-white" />
