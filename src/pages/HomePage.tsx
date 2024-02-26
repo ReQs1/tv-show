@@ -52,7 +52,7 @@ function HomePage() {
 
   return (
     <>
-      <div className="flex flex-wrap px-6 mb-20 text-black bg-gray-50">
+      <header className="flex flex-wrap px-6 mb-20 text-black bg-gray-50">
         <div className="flex flex-col justify-center py-12 md:pl-6 md:w-1/2">
           <h1 className="mb-10 text-2xl md:text-3xl xl:text-4xl">
             Join the world's largest community of TV and movie fans
@@ -83,7 +83,7 @@ function HomePage() {
             style={{ width: "480px" }}
           />
         </div>
-      </div>
+      </header>
 
       {/* Trending Shows Section  */}
 

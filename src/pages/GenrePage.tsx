@@ -4,7 +4,7 @@ import { Link, useParams, useSearchParams } from "react-router-dom";
 import { useInView } from "react-intersection-observer";
 
 import InfiniteScrollCard from "@/components/InfiniteScrollCard";
-import { Skeleton } from "@/components/skeleton";
+import InfiniteScrollLoader from "@/components/InfiniteScrollLoader";
 import ScrollToTopBtn from "@/components/ScrollToTopBtn";
 
 import { getGenreById, getGenreMovies } from "@/services/themoviedbAPI";
@@ -106,20 +106,7 @@ function GenrePage() {
       </div>
       <section>
         <div className="flex flex-wrap md:gap-6 gap-9">
-          {isLoading &&
-            Array(20)
-              .fill(0)
-              .map((_, i) => {
-                return (
-                  <div
-                    className="flex flex-col flex-1 space-y-2 basis-48 lg:max-w-[200px]"
-                    key={i}
-                  >
-                    <Skeleton className="h-[288px] w-[100%]" />
-                    <Skeleton className="h-[30px] w-[100%]" />
-                  </div>
-                );
-              })}
+          {isLoading && <InfiniteScrollLoader />}
 
           {error && (
             <p>{`Couldn't fetch ${type === "tv" ? "TV Shows" : "Movies"}`}</p>
@@ -148,20 +135,7 @@ function GenrePage() {
               );
             })}
 
-          {isFetchingNextPage &&
-            Array(20)
-              .fill(0)
-              .map((_, i) => {
-                return (
-                  <div
-                    className="flex flex-col flex-1 space-y-2 basis-48 lg:max-w-[200px]"
-                    key={i}
-                  >
-                    <Skeleton className="h-[288px] w-[100%]" />
-                    <Skeleton className="h-[30px] w-[100%]" />
-                  </div>
-                );
-              })}
+          {isFetchingNextPage && <InfiniteScrollLoader />}
         </div>
 
         {isSuccess && !hasNextPage && (

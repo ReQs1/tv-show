@@ -55,7 +55,6 @@ function InfiniteScrollCard({ entry, lastRef, type, currentGenre }: CardProps) {
               ? `https://image.tmdb.org/t/p/w500${entry.poster_path}`
               : "https://placehold.co/500x750?text=No+Movie+Poster"
           }
-          // src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
           alt={entry.title || ("name" in entry ? entry.name : "")}
         />
       </Link>
