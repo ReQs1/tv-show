@@ -132,14 +132,14 @@ function MoviePage() {
 
             <div className="hidden xl:block">
               <div className="flex flex-col items-center">
-                <div className="py-2 space-y-1 text-center bg-black rounded-md w-72">
+                <div className="py-3 space-y-1 text-center bg-black rounded-md w-72">
                   <p className="text-xl">Status</p>
                   <p className="text-2xl font-bold">{status}</p>
                 </div>
 
                 {/* popularity  */}
 
-                <div className="py-2 mt-8 space-y-1 text-center bg-black rounded-md w-72">
+                <div className="py-3 mt-8 space-y-1 text-center bg-black rounded-md w-72">
                   <p className="text-xl">TheMovieDB Popularity</p>
                   <p className="text-2xl font-bold">{Math.floor(popularity)}</p>
                 </div>
