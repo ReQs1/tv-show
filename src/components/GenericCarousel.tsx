@@ -1,5 +1,4 @@
 import { useInView } from "react-intersection-observer";
-
 import {
   Carousel,
   CarouselContent,
@@ -8,17 +7,19 @@ import {
   CarouselPrevious,
 } from "./carousel";
 import CarouselCard from "./CarouselCard";
-import type { ShowType, MovieType } from "@/lib/types";
+import type { ShowType, MovieType, CastType } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
 type GenericCarouselProps = {
-  data: MovieType[] | ShowType[];
+  data: MovieType[] | ShowType[] | CastType[];
   title: string;
-  description: string;
+  description?: string;
   type?: "movie" | "tv";
-  vartiant?: "big" | "md" | "sm";
+  variant?: "big" | "md" | "sm";
+  isLooped: boolean;
+  hasArrows: boolean;
   className?: string;
-  isAnimation: boolean;
+  animateOnInView?: boolean;
 };
 
 function GenericCarousel({
@@ -26,44 +27,55 @@ function GenericCarousel({
   title,
   description,
   type,
-  vartiant,
+  variant,
+  isLooped,
+  hasArrows,
   className,
+  animateOnInView,
 }: GenericCarouselProps) {
   const { ref, inView } = useInView({
     triggerOnce: true,
-    threshold: 0.4,
   });
-
   return (
-    <section className={cn("mb-16", className)} ref={ref}>
-      <div className="px-4 mb-8 space-y-4 md:px-10">
-        <h2 className="flex items-center gap-4 text-3xl font-bold md:text-4xl">
-          {title}
-        </h2>
+    <section
+      className={cn("mb-16", className)}
+      ref={animateOnInView ? ref : null}
+    >
+      <div
+        className={cn("pl-4 md:pl-10 mb-8 ", {
+          ["space-y-4"]: description,
+        })}
+      >
+        <h2 className="text-3xl font-bold md:text-4xl">{title}</h2>
         {description && <p className="text-stone-600">{description}</p>}
       </div>
 
       {data && (
         <Carousel
-          className={cn("transition-transform duration-1000", {
-            ["translate-y-10"]: !inView,
-            ["translate-y-0"]: inView,
+          className={cn("transition-all duration-500", {
+            ["translate-y-10"]: animateOnInView && !inView,
+            ["translate-y-0"]: animateOnInView && inView,
           })}
           opts={{
+            loop: isLooped,
             align: "start",
             dragFree: true,
             slidesToScroll: "auto",
           }}
         >
           <CarouselContent className="-ml-4">
-            {data.map((entry: MovieType | ShowType) => (
+            {data.map((entry: MovieType | ShowType | CastType) => (
               <CarouselItem key={entry.id} className="pl-4 basis-auto">
-                <CarouselCard entry={entry} type={type} variant={vartiant} />
+                <CarouselCard entry={entry} type={type} variant={variant} />
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious className="left-0 hidden w-10 h-full text-white border-none rounded-none md:flex md:w-20 top-1/2 bg-black/60 focus:bg-black/70 hover:bg-black/60 hover:text-white" />
-          <CarouselNext className="right-0 hidden w-10 h-full text-white border-none rounded-none md:flex md:w-20 top-1/2 bg-black/60 focus:bg-black/70 hover:bg-black/60 hover:text-white" />
+          {hasArrows && (
+            <>
+              <CarouselPrevious className="left-0 hidden w-10 h-full text-white border-none rounded-none md:flex md:w-20 top-1/2 bg-black/60 focus:bg-black/70 hover:bg-black/60 hover:text-white" />
+              <CarouselNext className="right-0 hidden w-10 h-full text-white border-none rounded-none md:flex md:w-20 top-1/2 bg-black/60 focus:bg-black/70 hover:bg-black/60 hover:text-white" />
+            </>
+          )}
         </Carousel>
       )}
     </section>

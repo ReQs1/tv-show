@@ -33,8 +33,8 @@ function EpisodesAccordion({
   const [isOpened, setIsOpened] = useState(defaultValue);
 
   return (
-    <section className={cn("mb-16", className)}>
-      <div className="px-4 mb-8 space-y-4 w-fit md:px-10">
+    <div className={cn("mb-16", className)}>
+      <div className="pl-4 mb-8 space-y-4 w-fit md:pl-10">
         <h2 className="flex items-center gap-4 text-3xl font-bold md:text-4xl">
           {title}
           {isOpened ? (
@@ -68,7 +68,7 @@ function EpisodesAccordion({
           <CarouselNext className="right-0 hidden w-10 h-full text-white border-none rounded-none md:flex md:w-20 top-1/2 bg-black/60 focus:bg-black/70 hover:bg-black/60 hover:text-white" />
         </Carousel>
       )}
-    </section>
+    </div>
   );
 }
 

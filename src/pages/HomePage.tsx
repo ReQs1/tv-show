@@ -99,7 +99,9 @@ function HomePage() {
           title="Trending Shows"
           description="Shows with most reactions in the last 3 days"
           type="tv"
-          isAnimation={true}
+          isLooped={true}
+          hasArrows={true}
+          animateOnInView={true}
         />
       )}
 
@@ -117,7 +119,9 @@ function HomePage() {
           title="Trending Movies"
           description="Movies with most reactions in the last 3 days"
           type="movie"
-          isAnimation={true}
+          isLooped={true}
+          hasArrows={true}
+          animateOnInView={true}
         />
       )}
 
@@ -135,7 +139,9 @@ function HomePage() {
           title="Now Playing Movies"
           description="Movies that are currently in theatres"
           type="movie"
-          isAnimation={true}
+          isLooped={true}
+          hasArrows={true}
+          animateOnInView={true}
         />
       )}
 
@@ -153,7 +159,9 @@ function HomePage() {
           title="Airing Today"
           description="TV shows airing today"
           type="tv"
-          isAnimation={true}
+          isLooped={true}
+          hasArrows={true}
+          animateOnInView={true}
         />
       )}
 
