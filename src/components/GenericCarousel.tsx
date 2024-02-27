@@ -28,7 +28,6 @@ function GenericCarousel({
   type,
   vartiant,
   className,
-  isAnimation,
 }: GenericCarouselProps) {
   const { ref, inView } = useInView({
     triggerOnce: true,
@@ -36,7 +35,7 @@ function GenericCarousel({
   });
 
   return (
-    <section className={cn("mb-16", className)} ref={isAnimation ? ref : null}>
+    <section className={cn("mb-16", className)} ref={ref}>
       <div className="px-4 mb-8 space-y-4 md:px-10">
         <h2 className="flex items-center gap-4 text-3xl font-bold md:text-4xl">
           {title}
