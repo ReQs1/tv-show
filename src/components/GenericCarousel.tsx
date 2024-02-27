@@ -11,29 +11,37 @@ import CarouselCard from "./CarouselCard";
 import type { ShowType, MovieType } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
-type MoviesCarouselProps = {
+type GenericCarouselProps = {
   data: MovieType[] | ShowType[];
   title: string;
   description: string;
   type?: "movie" | "tv";
+  vartiant?: "big" | "md" | "sm";
+  className?: string;
+  isAnimation: boolean;
 };
 
-function MoviesCarousel({
+function GenericCarousel({
   data,
   title,
   description,
   type,
-}: MoviesCarouselProps) {
+  vartiant,
+  className,
+  isAnimation,
+}: GenericCarouselProps) {
   const { ref, inView } = useInView({
     triggerOnce: true,
     threshold: 0.4,
   });
 
   return (
-    <section className="mb-16 " ref={ref}>
+    <section className={cn("mb-16", className)} ref={isAnimation ? ref : null}>
       <div className="px-4 mb-8 space-y-4 md:px-10">
-        <h2 className="text-3xl font-bold md:text-4xl">{title}</h2>
-        <p className="text-stone-600">{description}</p>
+        <h2 className="flex items-center gap-4 text-3xl font-bold md:text-4xl">
+          {title}
+        </h2>
+        {description && <p className="text-stone-600">{description}</p>}
       </div>
 
       {data && (
@@ -43,7 +51,6 @@ function MoviesCarousel({
             ["translate-y-0"]: inView,
           })}
           opts={{
-            loop: true,
             align: "start",
             dragFree: true,
             slidesToScroll: "auto",
@@ -52,7 +59,7 @@ function MoviesCarousel({
           <CarouselContent className="-ml-4">
             {data.map((entry: MovieType | ShowType) => (
               <CarouselItem key={entry.id} className="pl-4 basis-auto">
-                <CarouselCard entry={entry} type={type} />
+                <CarouselCard entry={entry} type={type} variant={vartiant} />
               </CarouselItem>
             ))}
           </CarouselContent>
@@ -64,4 +71,4 @@ function MoviesCarousel({
   );
 }
 
-export default MoviesCarousel;
+export default GenericCarousel;

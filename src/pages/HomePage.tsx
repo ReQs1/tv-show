@@ -13,7 +13,7 @@ import Lottie, { LottieRefCurrentProps } from "lottie-react";
 import { Bell, CheckCircle2, Eye, Search } from "lucide-react";
 
 import GenresList from "@/components/GenresList";
-import MoviesCarousel from "@/components/MoviesCarousel";
+import GenericCarousel from "@/components/GenericCarousel";
 import LoadingCarousel from "@/components/LoadingCarousel";
 
 function HomePage() {
@@ -94,11 +94,12 @@ function HomePage() {
       )}
 
       {trendingShows && (
-        <MoviesCarousel
+        <GenericCarousel
           data={trendingShows}
           title="Trending Shows"
           description="Shows with most reactions in the last 3 days"
           type="tv"
+          isAnimation={true}
         />
       )}
 
@@ -111,11 +112,12 @@ function HomePage() {
       )}
 
       {trendingMovies && (
-        <MoviesCarousel
+        <GenericCarousel
           data={trendingMovies}
           title="Trending Movies"
           description="Movies with most reactions in the last 3 days"
           type="movie"
+          isAnimation={true}
         />
       )}
 
@@ -128,11 +130,12 @@ function HomePage() {
       )}
 
       {nowPlayingMovies && (
-        <MoviesCarousel
+        <GenericCarousel
           data={nowPlayingMovies}
           title="Now Playing Movies"
           description="Movies that are currently in theatres"
           type="movie"
+          isAnimation={true}
         />
       )}
 
@@ -145,11 +148,12 @@ function HomePage() {
       )}
 
       {airingShows && (
-        <MoviesCarousel
+        <GenericCarousel
           data={airingShows}
           title="Airing Today"
           description="TV shows airing today"
           type="tv"
+          isAnimation={true}
         />
       )}
 

@@ -6,7 +6,7 @@ import HomePage from "./pages/HomePage";
 import GenrePage from "./pages/GenrePage";
 import AppLayout from "./components/AppLayout";
 import DiscoverPage from "./pages/DiscoverPage";
-import MoviePage from "./pages/MoviePage";
+import DetailsPage from "./pages/DetailsPage";
 
 const queryClient = new QueryClient();
 
@@ -18,7 +18,7 @@ function App() {
           <Route element={<AppLayout />}>
             <Route path="/" element={<HomePage />} />
             <Route path=":type" element={<DiscoverPage />} />
-            <Route path=":type/:id" element={<MoviePage />} />
+            <Route path=":type/:id" element={<DetailsPage />} />
             <Route path="genres/:genreId" element={<GenrePage />} />
             <Route path="*" element={<NoPageFound />} />
           </Route>

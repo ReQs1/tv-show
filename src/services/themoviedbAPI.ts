@@ -1,10 +1,4 @@
-import type {
-  GenreType,
-  MovieDetails,
-  MovieType,
-  ShowDetails,
-  ShowType,
-} from "@/lib/types";
+import type { GenreType } from "@/lib/types";
 
 const BASE_URL = "https://api.themoviedb.org";
 const VERSION = "3";
@@ -17,9 +11,7 @@ const options = {
   },
 };
 
-export async function getTrending(
-  type: string
-): Promise<ShowType[] | MovieType[]> {
+export async function getTrending(type: string) {
   try {
     const res = await fetch(
       `${BASE_URL}/${VERSION}/trending/${type}/week?language=en-US`,
@@ -33,7 +25,7 @@ export async function getTrending(
   }
 }
 
-export async function getNowPlayingMovies(): Promise<ShowType[] | MovieType[]> {
+export async function getNowPlayingMovies() {
   try {
     const res = await fetch(
       `${BASE_URL}/${VERSION}/movie/now_playing?language=en-US&page=1`,
@@ -47,7 +39,7 @@ export async function getNowPlayingMovies(): Promise<ShowType[] | MovieType[]> {
   }
 }
 
-export async function getAiringShows(): Promise<ShowType[] | MovieType[]> {
+export async function getAiringShows() {
   try {
     const res = await fetch(
       `${BASE_URL}/${VERSION}/tv/airing_today?language=en-US&page=1`,
@@ -61,7 +53,7 @@ export async function getAiringShows(): Promise<ShowType[] | MovieType[]> {
   }
 }
 
-export async function getGenres(type: string): Promise<GenreType[]> {
+export async function getGenres(type: string) {
   try {
     const res = await fetch(
       `${BASE_URL}/${VERSION}/genre/${type}/list?language=en-US`,
@@ -75,10 +67,7 @@ export async function getGenres(type: string): Promise<GenreType[]> {
   }
 }
 
-export async function getGenreById(
-  id: string,
-  type: string
-): Promise<GenreType | undefined> {
+export async function getGenreById(id: string, type: string) {
   try {
     const res = await fetch(
       `${BASE_URL}/${VERSION}/genre/${type}/list?language=en-US`,
@@ -111,10 +100,7 @@ export async function getGenreMovies(id: string, type: string, page: number) {
   }
 }
 
-export async function getBasicMovieInfo(
-  id: number,
-  type: string
-): Promise<MovieDetails | ShowDetails | undefined> {
+export async function getBasicMovieInfo(id: number, type: string) {
   try {
     const res = await fetch(
       `${BASE_URL}/${VERSION}/${type}/${id}?language=en-US`,
