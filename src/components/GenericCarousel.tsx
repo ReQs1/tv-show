@@ -22,6 +22,9 @@ type GenericCarouselProps = {
   animateOnInView?: boolean;
 };
 
+const buttonClasses =
+  "hidden w-10 h-full text-white border-none rounded-none md:flex md:w-20 top-1/2 bg-black/60 focus:bg-black/70 hover:bg-black/60 hover:text-white";
+
 function GenericCarousel({
   data,
   title,
@@ -52,8 +55,8 @@ function GenericCarousel({
 
       {data && (
         <Carousel
-          className={cn("transition-all duration-500", {
-            ["translate-y-10"]: animateOnInView && !inView,
+          className={cn("transition-all duration-700", {
+            ["translate-y-12"]: animateOnInView && !inView,
             ["translate-y-0"]: animateOnInView && inView,
           })}
           opts={{
@@ -72,8 +75,8 @@ function GenericCarousel({
           </CarouselContent>
           {hasArrows && (
             <>
-              <CarouselPrevious className="left-0 hidden w-10 h-full text-white border-none rounded-none md:flex md:w-20 top-1/2 bg-black/60 focus:bg-black/70 hover:bg-black/60 hover:text-white" />
-              <CarouselNext className="right-0 hidden w-10 h-full text-white border-none rounded-none md:flex md:w-20 top-1/2 bg-black/60 focus:bg-black/70 hover:bg-black/60 hover:text-white" />
+              <CarouselPrevious className={cn("left-0", buttonClasses)} />
+              <CarouselNext className={cn("right-0", buttonClasses)} />
             </>
           )}
         </Carousel>

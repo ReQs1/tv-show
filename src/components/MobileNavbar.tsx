@@ -19,7 +19,6 @@ function MobileNavbar({ setIsOpen }: Props) {
       animate={{ y: 0 }}
       exit={{ y: -400 }}
       ref={ref}
-      layout
     >
       <button
         className="absolute right-4 top-6"

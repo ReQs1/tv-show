@@ -32,8 +32,6 @@ function MoviePage() {
       </div>
     );
 
-  const { seasons, credits } = data;
-
   if (error instanceof Error)
     return (
       <div className="flex items-center justify-center">
@@ -41,6 +39,7 @@ function MoviePage() {
       </div>
     );
 
+  const { seasons, credits, similar } = data;
   return (
     <>
       <DetailsHeader data={data} />
@@ -55,6 +54,17 @@ function MoviePage() {
           isLooped={false}
           hasArrows={false}
           className={seasons ? "" : "mt-16"}
+        />
+      )}
+
+      {similar.results && (
+        <GenericCarousel
+          data={similar.results}
+          title="People also watched"
+          variant="md"
+          isLooped={true}
+          hasArrows={true}
+          type={type}
         />
       )}
     </>

@@ -34,8 +34,8 @@ function EpisodesAccordion({
 
   return (
     <div className={cn("mb-16", className)}>
-      <div className="pl-4 mb-8 space-y-4 w-fit md:pl-10">
-        <h2 className="flex items-center gap-4 text-3xl font-bold md:text-4xl">
+      <div className="pl-4 mb-8 w-fit md:pl-10">
+        <h2 className="flex items-center gap-4 text-3xl font-bold capitalize md:text-4xl">
           {title}
           {isOpened ? (
             <button onClick={() => setIsOpened((prev) => !prev)}>

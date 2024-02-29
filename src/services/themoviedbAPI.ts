@@ -131,7 +131,7 @@ export async function discoverMovies(type: string, page: number) {
 export async function getMovieDetails(id: string) {
   try {
     const res = await fetch(
-      `${BASE_URL}/${VERSION}/movie/${id}?append_to_response=videos%2Cwatch%2Fproviders%2Creviews%2Csimilar%2Ccredits%2Cimages&include_image_language=en,null&language=en-US`,
+      `${BASE_URL}/${VERSION}/movie/${id}?append_to_response=videos%2Cwatch%2Fproviders%2Csimilar%2Ccredits%2C&language=en-US`,
       options
     );
     const data = await res.json();
@@ -145,7 +145,7 @@ export async function getMovieDetails(id: string) {
 export async function getShowDetails(id: string) {
   try {
     const res = await fetch(
-      `${BASE_URL}/${VERSION}/tv/${id}?append_to_response=videos%2Cwatch%2Fproviders%2Creviews%2Csimilar%2Ccredits%2Cseason%2F1%2Cseason%2F2%2Cseason%2F3%2Cimages&include_image_language=en,null&language=en-US`,
+      `${BASE_URL}/${VERSION}/tv/${id}?append_to_response=videos%2Cwatch%2Fproviders%2Csimilar%2Ccredits%2Cseason%2F1%2Cseason%2F2%2Cseason%2F3%2C&language=en-US`,
       options
     );
     const data = await res.json();
