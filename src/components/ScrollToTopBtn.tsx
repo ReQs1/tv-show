@@ -9,7 +9,7 @@ function ScrollToTopBtn() {
     <button
       onClick={() => window.scrollTo({ top: 0, left: 0, behavior: "smooth" })}
       className={cn(
-        "fixed p-3 bg-yellow-400 rounded-full bottom-14 right-6 transition-opacity z-50 hover:text-white focus:text-white shadow-xl",
+        "fixed p-3 bg-yellow-400 rounded-full bottom-14 right-6 transition-opacity z-50 hover:text-white focus:text-white shadow-xl duration-500",
         {
           ["opacity-0 invisible"]: !isScrolled,
         }

@@ -13,7 +13,7 @@ function OverviewComponent({ overview, variant }: Props) {
 
   if (variant === "desktop")
     return (
-      <div className="hidden mt-8 md:block md:max-w-[600px] md:max-h-32 overflow-auto">
+      <div className="hidden mt-8 md:block md:max-w-[600px] md:max-h-36 overflow-auto">
         <p className="text-lg">{overview}</p>
       </div>
     );
