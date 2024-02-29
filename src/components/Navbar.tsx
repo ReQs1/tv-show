@@ -23,10 +23,9 @@ function Navbar() {
       {isInfiniteScroll && (
         <nav
           className={cn(
-            "fixed top-0  flex items-center justify-between w-full  px-5 py-4 transition-all duration-500 bg-yellow-400  md:px-12 z-50 rounded-full",
+            "fixed top-0 flex items-center justify-between w-full  px-5 py-4  bg-yellow-400  md:px-12 z-50 rounded-full invisible opacity-0",
             {
-              ["visible opacity-100"]: isScrolled,
-              ["invisible opacity-0"]: !isScrolled,
+              ["visible opacity-100 transition-all duration-500"]: isScrolled,
             }
           )}
         >

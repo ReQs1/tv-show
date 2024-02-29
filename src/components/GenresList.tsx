@@ -21,8 +21,6 @@ const variants = {
   },
 };
 
-const MotionLink = motion(Link);
-
 function GenresList() {
   const { data: movieGenres, error: moviesError } = useQuery({
     queryKey: "movieGenres",
@@ -38,10 +36,11 @@ function GenresList() {
     <div className="flex flex-col items-center py-8 md:px-6 md:pb-20 bg-gray-50 mt-28 2xl:px-80">
       <h2 className="text-3xl font-semibold">Genres</h2>
       <motion.div
-        animate={{
-          transition: {
-            staggerChildren: 0.05,
-          },
+        variants={variants}
+        initial="initial"
+        whileInView="animate"
+        viewport={{
+          once: true,
         }}
         className="flex flex-wrap justify-center gap-4 mt-12 lg:gap-6"
       >
@@ -49,19 +48,13 @@ function GenresList() {
           <p>Couldn't load genres</p>
         ) : (
           mergedGenres.map((genre: GenreType) => (
-            <MotionLink
+            <Link
               to={`genres/${genre.id}?view=${genre.type}`}
               key={genre.id}
               className="px-4 py-2 text-white transition-colors bg-yellow-400 rounded-full cursor-pointer hover:bg-yellow-500"
-              variants={variants}
-              initial="initial"
-              whileInView="animate"
-              viewport={{
-                once: true,
-              }}
             >
               {genre.name}
-            </MotionLink>
+            </Link>
           ))
         )}
       </motion.div>
