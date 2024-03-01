@@ -33,7 +33,7 @@ function GenresList() {
 
   const mergedGenres = mergeGenres(movieGenres, tvShowGenres);
   return (
-    <div className="flex flex-col items-center py-8 md:px-6 md:pb-20 bg-gray-50 mt-28 2xl:px-80">
+    <div className="flex flex-col items-center px-6 py-8 md:pb-20 bg-gray-50 mt-28 2xl:px-80">
       <h2 className="text-3xl font-semibold">Genres</h2>
       <motion.div
         variants={variants}

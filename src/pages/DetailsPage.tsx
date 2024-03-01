@@ -20,8 +20,6 @@ function MoviePage() {
     staleTime: Infinity,
   });
 
-  console.log(data);
-
   useChangeDocTitle(data);
   useScrollToTopOnMount();
 
@@ -51,7 +49,6 @@ function MoviePage() {
           data={credits.cast}
           title="Cast"
           variant="sm"
-          isLooped={false}
           hasArrows={false}
           className={seasons ? "" : "mt-16"}
         />
@@ -62,7 +59,6 @@ function MoviePage() {
           data={similar.results}
           title="People also watched"
           variant="md"
-          isLooped={true}
           hasArrows={true}
           type={type}
         />

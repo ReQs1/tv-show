@@ -16,7 +16,6 @@ type GenericCarouselProps = {
   description?: string;
   type?: "movie" | "tv";
   variant?: "big" | "md" | "sm";
-  isLooped: boolean;
   hasArrows: boolean;
   className?: string;
   animateOnInView?: boolean;
@@ -31,7 +30,6 @@ function GenericCarousel({
   description,
   type,
   variant,
-  isLooped,
   hasArrows,
   className,
   animateOnInView,
@@ -45,7 +43,7 @@ function GenericCarousel({
       ref={animateOnInView ? ref : null}
     >
       <div
-        className={cn("pl-4 md:pl-10 mb-8 ", {
+        className={cn("pl-7 md:pl-10 mb-8 ", {
           ["space-y-4"]: description,
         })}
       >
@@ -60,7 +58,7 @@ function GenericCarousel({
             ["translate-y-0"]: animateOnInView && inView,
           })}
           opts={{
-            loop: isLooped,
+            loop: false,
             align: "start",
             dragFree: true,
             slidesToScroll: "auto",

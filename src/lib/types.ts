@@ -131,189 +131,6 @@ export type ShowDetails = MainType & {
   type: string;
 };
 
-export type MovieDetailsPageType = MovieDetails & {
-  images: {
-    backdrops: {
-      aspect_ratio: number;
-      file_path: string;
-      height: number;
-      iso_639_1: string;
-      vote_average: number;
-      vote_count: number;
-      width: number;
-    }[];
-    logos: {
-      aspect_ratio: number;
-      file_path: string;
-      height: number;
-      iso_639_1: string;
-      vote_average: number;
-      vote_count: number;
-      width: number;
-    }[];
-    posters: {
-      aspect_ratio: number;
-      file_path: string;
-      height: number;
-      iso_639_1: string;
-      vote_average: number;
-      vote_count: number;
-      width: number;
-    }[];
-  };
-  videos: {
-    results: {
-      id: string;
-      iso_639_1: string;
-      iso_3166_1: string;
-      key: string;
-      name: string;
-      official: boolean;
-      published_at: string;
-      site: string;
-      size: number;
-      type: string;
-    }[];
-  };
-  credits: {
-    cast: CastType[];
-  };
-  "watch/providers": {
-    results: {
-      GB: {
-        buy: {
-          display_priority: number;
-          logo_path: string;
-          provider_id: number;
-          provider_name: string;
-        };
-        link: string;
-        rent: {
-          display_priority: number;
-          logo_path: string;
-          provider_id: number;
-          provider_name: string;
-        };
-      };
-    };
-  };
-  reviews: {
-    page: number;
-    results: {
-      author: string;
-      author_details: {
-        name: string;
-        username: string;
-        avatar_path: string;
-        rating: number;
-      };
-      content: string;
-      created_at: string;
-      id: string;
-      updated_at: string;
-      url: string;
-    }[];
-    total_pages: number;
-    total_results: number;
-  };
-};
-
-export type ShowDetailsPageType = ShowDetails & {
-  images: {
-    backdrops: {
-      aspect_ratio: number;
-      file_path: string;
-      height: number;
-      iso_639_1: string;
-      vote_average: number;
-      vote_count: number;
-      width: number;
-    }[];
-    logos: {
-      aspect_ratio: number;
-      file_path: string;
-      height: number;
-      iso_639_1: string;
-      vote_average: number;
-      vote_count: number;
-      width: number;
-    }[];
-    posters: {
-      aspect_ratio: number;
-      file_path: string;
-      height: number;
-      iso_639_1: string;
-      vote_average: number;
-      vote_count: number;
-      width: number;
-    }[];
-  };
-  videos: {
-    results: {
-      id: string;
-      iso_639_1: string;
-      iso_3166_1: string;
-      key: string;
-      name: string;
-      official: boolean;
-      published_at: string;
-      site: string;
-      size: number;
-      type: string;
-    }[];
-  };
-  credits: {
-    cast: CastType[];
-  };
-  "watch/providers": {
-    results: {
-      GB: {
-        buy: {
-          display_priority: number;
-          logo_path: string;
-          provider_id: number;
-          provider_name: string;
-        };
-        link: string;
-        rent: {
-          display_priority: number;
-          logo_path: string;
-          provider_id: number;
-          provider_name: string;
-        };
-      };
-    };
-  };
-  reviews: {
-    page: number;
-    results: {
-      author: string;
-      author_details: {
-        name: string;
-        username: string;
-        avatar_path: string;
-        rating: number;
-      };
-      content: string;
-      created_at: string;
-      id: string;
-      updated_at: string;
-      url: string;
-    }[];
-    total_pages: number;
-    total_results: number;
-  };
-  "season/1": {
-    air_date: string;
-    episodes: EpisodeType[];
-    name: string;
-    overview: string;
-    poster_path: string;
-    season_number: number;
-    vote_average: number;
-  };
-};
-
 export type CastType = {
   adult: boolean;
   cast_id: number;
@@ -327,33 +144,6 @@ export type CastType = {
   original_name: string;
   popularity: number;
   profile_path: string;
-};
-
-export type SeasonType = {
-  air_date: string;
-  episodes: {
-    air_date: string;
-    crew: any[];
-    episode_number: number;
-    episode_type: string;
-    guest_stars: any[];
-    id: number;
-    name: string;
-    overview: string;
-    production_code: string;
-    runtime: number;
-    season_number: number;
-    show_id: number;
-    still_path: string;
-    vote_average: number;
-    vote_count: number;
-  };
-  name: string;
-  overview: string;
-  poster_path: string;
-  season_number: number;
-  vote_average: number;
-  _id: number;
 };
 
 export type EpisodeType = {
@@ -372,6 +162,19 @@ export type EpisodeType = {
   still_path: string;
   vote_average: number;
   vote_count: number;
+};
+
+export type VideoType = {
+  id: string;
+  iso_639_1: string;
+  iso_3166_1: string;
+  key: string;
+  name: string;
+  official: boolean;
+  published_at: string;
+  site: string;
+  size: number;
+  type: string;
 };
 
 export type SimilarType = {

@@ -66,7 +66,11 @@ function DetailsHeader({ data }: any) {
 
         <OverviewComponent overview={overview} variant="mobile" />
 
-        <StatusTrailerComponent popularity={popularity} status={status} />
+        <StatusTrailerComponent
+          popularity={popularity}
+          status={status}
+          videos={data.videos.results}
+        />
       </div>
     </header>
   );
