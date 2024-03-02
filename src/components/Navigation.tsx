@@ -38,6 +38,9 @@ function Navigation({ setIsOpen }: NavigationProps) {
           </NavLink>
           <span className="sr-only">Link to Movies</span>
         </li>
+        <ul>
+          <NavLink to="/watchlist">Watch List</NavLink>
+        </ul>
       </ul>
     </>
   );

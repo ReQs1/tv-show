@@ -199,3 +199,22 @@ export type GenreType = {
   name: string;
   type?: string;
 };
+
+export type fullMovieDetails = MovieDetails &
+  SimilarType &
+  CastType & {
+    videos: {
+      results: VideoType[];
+    };
+    uniqueId?: string;
+  };
+
+export type fullShowDetails = ShowDetails &
+  SimilarType &
+  EpisodeType &
+  CastType & {
+    videos: {
+      results: VideoType[];
+    };
+    uniqueId?: string;
+  };

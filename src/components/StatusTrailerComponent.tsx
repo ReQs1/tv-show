@@ -1,13 +1,12 @@
-import { VideoType } from "@/lib/types";
+import { fullMovieDetails, fullShowDetails } from "@/lib/types";
 import StatusButtons from "./StatusButtons";
 
 type Props = {
-  popularity: number;
-  status: string;
-  videos: VideoType[];
+  data: fullMovieDetails | fullShowDetails;
 };
 
-function StatusTrailerComponent({ popularity, status, videos }: Props) {
+function StatusTrailerComponent({ data }: Props) {
+  const { popularity, status } = data;
   return (
     <div className="flex flex-col items-center mt-10 xl:mt-0 xl:ml-10">
       <div className="flex flex-col items-center gap-6 sm:flex-row xl:flex-col">
@@ -25,7 +24,7 @@ function StatusTrailerComponent({ popularity, status, videos }: Props) {
       </div>
 
       <div className="space-y-4 mt-14">
-        <StatusButtons videos={videos} />
+        <StatusButtons data={data} />
       </div>
     </div>
   );

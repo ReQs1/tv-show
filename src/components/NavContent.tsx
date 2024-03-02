@@ -15,11 +15,11 @@ function NavLinks() {
   return (
     <>
       <div className="w-3/5 xl:w-2/3">
-        <div className="items-center flex-grow hidden gap-6 md:flex md:justify-between ">
+        <div className="items-center flex-grow hidden gap-6 xl:flex xl:justify-between ">
           <Navigation />
         </div>
 
-        <div className="flex items-center justify-end cursor-pointer md:hidden">
+        <div className="flex items-center justify-end cursor-pointer xl:hidden">
           <button onClick={toggleNavBar}>
             <Menu size={36} />
             <span className="sr-only">Open mobile navbar</span>

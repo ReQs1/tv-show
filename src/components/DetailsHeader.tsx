@@ -15,8 +15,7 @@ function DetailsHeader({ data }: any) {
     runtime,
     number_of_seasons,
     overview,
-    status,
-    popularity,
+
     vote_average,
     tagline,
   } = data;
@@ -66,11 +65,7 @@ function DetailsHeader({ data }: any) {
 
         <OverviewComponent overview={overview} variant="mobile" />
 
-        <StatusTrailerComponent
-          popularity={popularity}
-          status={status}
-          videos={data.videos.results}
-        />
+        <StatusTrailerComponent data={data} />
       </div>
     </header>
   );

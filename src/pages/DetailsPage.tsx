@@ -38,6 +38,7 @@ function MoviePage() {
     );
 
   const { seasons, credits, similar } = data;
+
   return (
     <>
       <DetailsHeader data={data} />
@@ -54,7 +55,7 @@ function MoviePage() {
         />
       )}
 
-      {similar.results && (
+      {similar.results.length > 0 ? (
         <GenericCarousel
           data={similar.results}
           title="People also watched"
@@ -62,6 +63,13 @@ function MoviePage() {
           hasArrows={true}
           type={type}
         />
+      ) : (
+        <div className="mb-16 pl-7 md:pl-10">
+          <h2 className="mb-8 text-3xl font-bold md:text-4xl">
+            People also watched
+          </h2>
+          <p className="text-lg">There is nothing here</p>
+        </div>
       )}
     </>
   );

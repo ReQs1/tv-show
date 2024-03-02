@@ -6,7 +6,7 @@ function InfiniteScrollLoader() {
     .map((_, i) => {
       return (
         <div
-          className="flex flex-col flex-1 space-y-2 basis-48 lg:max-w-[200px]"
+          className="flex flex-col flex-1 space-y-2 basis-44 lg:max-w-[200px]"
           key={i}
         >
           <Skeleton className="h-[288px] w-[100%]" />
