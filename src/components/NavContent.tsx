@@ -2,10 +2,10 @@ import { useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import { Menu } from "lucide-react";
 
-import Navigation from "./Navigation";
+import NavLinks from "./NavLinks";
 import MobileNavbar from "./MobileNavbar";
 
-function NavLinks() {
+function NavContent() {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleNavBar = () => {
@@ -14,9 +14,9 @@ function NavLinks() {
 
   return (
     <>
-      <div className="w-3/5 xl:w-2/3">
+      <div className="flex-grow-[2]">
         <div className="items-center flex-grow hidden gap-6 xl:flex xl:justify-between ">
-          <Navigation />
+          <NavLinks />
         </div>
 
         <div className="flex items-center justify-end cursor-pointer xl:hidden">
@@ -34,4 +34,4 @@ function NavLinks() {
   );
 }
 
-export default NavLinks;
+export default NavContent;

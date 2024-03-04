@@ -7,6 +7,7 @@ type Props = {
 function Logo({ setIsOpen }: Props) {
   return (
     <NavLink
+      className="flex-grow"
       to="/"
       onClick={() => {
         if (setIsOpen) setIsOpen(false);
