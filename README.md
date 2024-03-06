@@ -47,7 +47,6 @@ To run TV-Show locally, follow these steps:
 4. Obtain an API key from [The Movie Database (TMDb)](https://www.themoviedb.org) and update the `.env` file with your API key and access token:
 
    ```plaintext
-   VITE_API_KEY=YOUR_API_KEY
    VITE_API_READ_ACCESS_TOKEN=YOUR_ACCESS_TOKEN
    ```
 

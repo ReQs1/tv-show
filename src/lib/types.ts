@@ -14,6 +14,7 @@ export type MovieType = {
   video: boolean;
   vote_average: number;
   vote_count: number;
+  uniqueId?: string;
 };
 
 export type ShowType = {
@@ -35,6 +36,7 @@ export type ShowType = {
   video: boolean;
   vote_average: number;
   vote_count: number;
+  uniqueId?: string;
 };
 
 type MainType = {
