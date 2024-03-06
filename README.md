@@ -61,6 +61,6 @@ To run TV-Show locally, follow these steps:
 ## To-Do
 
 - ~~Enhance navbar appearance for better aesthetics.~~
-- Create watchlist page.
+- ~~Create watchlist page.~~
 - Implement search functionality.
 - Fix footer appearance.

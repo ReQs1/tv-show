@@ -35,11 +35,13 @@ function NavLinks({ setIsOpen }: NavigationProps) {
           Genres
           {isGenresOpen ? (
             <ChevronUp
+              size={26}
               className="cursor-pointer"
               onClick={() => setIsGenresOpen((genre) => !genre)}
             />
           ) : (
             <ChevronDown
+              size={26}
               className="cursor-pointer"
               onClick={() => setIsGenresOpen((genre) => !genre)}
             />
