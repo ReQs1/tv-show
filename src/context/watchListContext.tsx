@@ -1,4 +1,4 @@
-import { fullMovieDetails, fullShowDetails } from "@/lib/types";
+import { MovieType, ShowType } from "@/lib/types";
 import { useContext, useState, createContext } from "react";
 
 type Props = {
@@ -6,14 +6,11 @@ type Props = {
 };
 
 type WatchListContextType = {
-  movies: (fullMovieDetails | fullShowDetails)[];
-  onAddToWatchList: (
-    data: fullMovieDetails | fullShowDetails,
-    type: string
-  ) => void;
+  movies: (ShowType | MovieType)[];
+  onAddToWatchList: (data: ShowType | MovieType, type: string) => void;
   onRemoveFromWatchList: (
-    data: fullMovieDetails | fullShowDetails,
-    type: string
+    data: ShowType | MovieType,
+    type: string | undefined
   ) => void;
 };
 
@@ -29,22 +26,19 @@ function WatchListProvider({ children }: Props) {
     return toWatchList ? JSON.parse(toWatchList) : [];
   });
 
-  const onAddToWatchList = (
-    data: fullMovieDetails | fullShowDetails,
-    type: string
-  ) => {
+  const onAddToWatchList = (data: ShowType | MovieType, type: string) => {
     const newMovies = [...movies, { ...data, uniqueId: `${data.id}-${type}` }];
     localStorage.setItem("toWatchList", JSON.stringify(newMovies));
     setMovies(newMovies);
   };
 
   const onRemoveFromWatchList = (
-    data: fullMovieDetails | fullShowDetails,
-    type: string
+    data: ShowType | MovieType,
+    type: string | undefined
   ) => {
+    if (type === undefined) return;
     const newMovies = movies.filter(
-      (movie: fullMovieDetails | fullShowDetails) =>
-        movie.uniqueId !== `${data.id}-${type}`
+      (movie: ShowType | MovieType) => movie.uniqueId !== `${data.id}-${type}`
     );
     localStorage.setItem("toWatchList", JSON.stringify(newMovies));
     setMovies(newMovies);

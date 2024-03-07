@@ -1,3 +1,4 @@
+import { useWatchlist } from "@/context/watchListContext";
 import type {
   MovieType,
   ShowType,
@@ -5,15 +6,19 @@ import type {
   EpisodeType,
   SimilarType,
 } from "@/lib/types";
+import { Heart } from "lucide-react";
 import { Link } from "react-router-dom";
 
 type PropType = {
   entry: ShowType | MovieType | CastType | EpisodeType | SimilarType;
   type?: "movie" | "tv";
   variant?: "big" | "md" | "sm";
+  watchlist?: boolean;
 };
 
-function CarouselCard({ entry, type, variant = "big" }: PropType) {
+function CarouselCard({ entry, type, variant = "big", watchlist }: PropType) {
+  const { onRemoveFromWatchList } = useWatchlist();
+
   if (variant === "sm" && "character" in entry)
     return (
       <div
@@ -83,23 +88,44 @@ function CarouselCard({ entry, type, variant = "big" }: PropType) {
 
   return (
     "poster_path" in entry && (
-      <Link to={`/${type}/${entry.id}`}>
-        <div
-          className="flex items-end w-40 p-3 bg-center bg-no-repeat bg-cover rounded-lg cursor-pointer h-52 md:h-64 md:w-52"
-          style={{
-            backgroundImage: `linear-gradient(rgba(255,255,255,0) 0%, rgba(0,0,0,0.8) 85%), url('${
-              entry.poster_path
-                ? `https://image.tmdb.org/t/p/w500${entry.poster_path}`
-                : "https://placehold.co/500x750?text=No+Poster"
-            }')`,
-          }}
-        >
-          <h3 className="text-lg font-bold text-white">
-            {("title" in entry && entry.title) ||
-              ("name" in entry && entry.name)}
-          </h3>
-        </div>
-      </Link>
+      <div className="relative">
+        {watchlist && (
+          <div
+            className="absolute cursor-pointer top-2 right-2"
+            onClick={() => {
+              if ("uniqueId" in entry) {
+                const uniqueId = entry.uniqueId;
+                if (typeof uniqueId === "string") {
+                  return onRemoveFromWatchList(
+                    entry,
+                    uniqueId.replace("-", " ").split(" ").at(1)
+                  );
+                }
+              }
+            }}
+          >
+            <Heart color="#f52e2e" fill="#f52e2e" />
+          </div>
+        )}
+
+        <Link to={`/${type}/${entry.id}`}>
+          <div
+            className="flex items-end w-40 p-3 bg-center bg-no-repeat bg-cover rounded-lg cursor-pointer h-52 md:h-64 md:w-52"
+            style={{
+              backgroundImage: `linear-gradient(rgba(255,255,255,0) 0%, rgba(0,0,0,0.8) 85%), url('${
+                entry.poster_path
+                  ? `https://image.tmdb.org/t/p/w500${entry.poster_path}`
+                  : "https://placehold.co/500x750?text=No+Poster"
+              }')`,
+            }}
+          >
+            <h3 className="text-lg font-bold text-white">
+              {("title" in entry && entry.title) ||
+                ("name" in entry && entry.name)}
+            </h3>
+          </div>
+        </Link>
+      </div>
     )
   );
 }

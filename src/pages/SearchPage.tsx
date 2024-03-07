@@ -66,7 +66,12 @@ function SearchPage() {
     }
   }, [inView, hasNextPage, fetchNextPage]);
 
-  if (error instanceof Error) return <div>{error.message}</div>;
+  if (error instanceof Error)
+    return (
+      <div>
+        <p className="text-lg text-bold">{error.message}</p>
+      </div>
+    );
 
   return (
     <div className="px-6 my-12 md:px-20 md:my-20">
@@ -109,7 +114,7 @@ function SearchPage() {
           {isFetchingNextPage && <InfiniteScrollLoader />}
         </div>
 
-        {isSuccess && filteredData.length > 20 && !hasNextPage && (
+        {isSuccess && filteredData.length > 10 && !hasNextPage && (
           <div className="flex justify-center my-8">
             <p className="text-lg font-semibold">Nothing more to show</p>
           </div>
@@ -121,6 +126,7 @@ function SearchPage() {
           </div>
         )}
       </section>
+
       <ScrollToTopBtn />
     </div>
   );

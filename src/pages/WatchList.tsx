@@ -12,7 +12,7 @@ function WatchList() {
 
       {movies.length === 0 && (
         <div className="flex items-center justify-center">
-          <p>There are no movies in your watchlist</p>
+          <p>There are no movies in your Watch List</p>
         </div>
       )}
 
@@ -23,6 +23,7 @@ function WatchList() {
               key={entry.uniqueId}
               entry={entry}
               type={entry.uniqueId.replace("-", " ").split(" ").at(1)}
+              watchlist={true}
             />
           ))}
         </div>

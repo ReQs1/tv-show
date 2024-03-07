@@ -37,7 +37,7 @@ function InfiniteScrollCard({ entry, lastRef, type, currentGenre }: CardProps) {
 
   return (
     <div
-      className="flex flex-col flex-1 basis-44 lg:max-w-[200px]"
+      className="flex flex-col flex-1 basis-44 max-w-[280px] sm:max-w-[200px]"
       ref={lastRef}
     >
       <Link to={`/${type}/${entry.id}`}>

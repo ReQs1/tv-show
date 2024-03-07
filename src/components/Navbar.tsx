@@ -10,6 +10,7 @@ function Navbar() {
   const isInfiniteScroll =
     location.pathname === "/tv" ||
     location.pathname === "/movie" ||
+    location.pathname.includes("/search") ||
     location.pathname.includes("/genres/");
   return (
     <header>
