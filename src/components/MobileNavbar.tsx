@@ -17,9 +17,9 @@ function MobileNavbar({ setIsOpen }: Props) {
     <motion.div
       className="absolute top-0 left-0 z-50 flex flex-col items-center w-screen gap-12 py-10 bg-yellow-400 xl:hidden"
       transition={{ duration: 0.3 }}
-      initial={{ x: 400 }}
+      initial={{ x: 500 }}
       animate={{ x: 0 }}
-      exit={{ x: 400 }}
+      exit={{ x: 500 }}
       ref={ref}
     >
       <button

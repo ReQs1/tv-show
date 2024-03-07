@@ -22,7 +22,7 @@ type GenericCarouselProps = {
 };
 
 const buttonClasses =
-  "hidden w-10 h-full text-white border-none rounded-none md:flex md:w-20 top-1/2 bg-black/60 focus:bg-black/70 hover:bg-black/60 hover:text-white";
+  "w-10 h-full text-white border-none rounded-none md:flex md:w-20 top-1/2 bg-black/60 focus:bg-black/70 hover:bg-black/60 hover:text-white";
 
 function GenericCarousel({
   data,

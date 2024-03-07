@@ -1,6 +1,25 @@
-function SearchInput() {
+import { Dispatch, SetStateAction, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+type Props = {
+  setIsOpen?: Dispatch<SetStateAction<boolean>>;
+};
+
+function SearchInput({ setIsOpen }: Props) {
+  const [query, setQuery] = useState("");
+  const navigate = useNavigate();
+
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!query) return;
+
+    setQuery("");
+    setIsOpen && setIsOpen(false);
+    navigate(`/search/${query}`);
+  };
+
   return (
-    <form className="flex items-center">
+    <form className="flex items-center" onSubmit={onSubmit}>
       <div className="flex items-center gap-4 border-b border-black ">
         <label htmlFor="search_input" className="cursor-pointer">
           <svg
@@ -23,6 +42,8 @@ function SearchInput() {
           type="text"
           className="py-1 text-xl bg-transparent outline-none placeholder:text-stone-600"
           placeholder="Search titles"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
         />
       </div>
     </form>

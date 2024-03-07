@@ -155,3 +155,17 @@ export async function getShowDetails(id: string) {
     throw new Error(e);
   }
 }
+
+export async function searchFetch(query: string, page: number) {
+  try {
+    const res = await fetch(
+      `${BASE_URL}/${VERSION}/search/multi?query=${query}&include_adult=false&language=en-US&page=${page}`,
+      options
+    );
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.error(`Error fetching search results: ${error}`);
+    throw new Error("Error fetching search results");
+  }
+}

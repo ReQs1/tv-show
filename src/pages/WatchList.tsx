@@ -4,7 +4,6 @@ import { useWatchlist } from "@/context/watchListContext";
 
 function WatchList() {
   const { movies } = useWatchlist();
-  console.log(movies);
   return (
     <div className="px-6 my-12 md:px-20 md:my-20">
       <div className="mb-12">

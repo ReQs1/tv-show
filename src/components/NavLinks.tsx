@@ -1,9 +1,9 @@
+import { Dispatch, SetStateAction, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { useQuery } from "react-query";
 
 import SearchInput from "./SearchInput";
-import { Dispatch, SetStateAction, useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
-import { useQuery } from "react-query";
 import { getGenres } from "@/services/themoviedbAPI";
 import { mergeGenres } from "@/lib/utils";
 import { GenreType } from "@/lib/types";
@@ -29,7 +29,7 @@ function NavLinks({ setIsOpen }: NavigationProps) {
   const mergedGenres = mergeGenres(movieGenres, tvShowGenres);
   return (
     <>
-      <SearchInput />
+      <SearchInput setIsOpen={setIsOpen} />
       <ul className="flex flex-col items-center gap-6 text-xl md:gap-8 xl:flex-row xl:text-xl xl:gap-14">
         <li className="relative flex items-center gap-1">
           Genres
@@ -37,13 +37,13 @@ function NavLinks({ setIsOpen }: NavigationProps) {
             <ChevronUp
               size={26}
               className="cursor-pointer"
-              onClick={() => setIsGenresOpen((genre) => !genre)}
+              onClick={() => setIsGenresOpen((isOpen) => !isOpen)}
             />
           ) : (
             <ChevronDown
               size={26}
               className="cursor-pointer"
-              onClick={() => setIsGenresOpen((genre) => !genre)}
+              onClick={() => setIsGenresOpen((isOpen) => !isOpen)}
             />
           )}
           <span className="sr-only">Genres Dropdown</span>
@@ -54,15 +54,13 @@ function NavLinks({ setIsOpen }: NavigationProps) {
             >
               {mergedGenres.map((genre: GenreType) => (
                 <div
+                  key={genre.id}
                   onClick={() => {
                     if (setIsOpen) setIsOpen(false);
                     setIsGenresOpen(false);
                   }}
                 >
-                  <Link
-                    to={`genres/${genre.id}?view=${genre.type}`}
-                    key={genre.id}
-                  >
+                  <Link to={`genres/${genre.id}?view=${genre.type}`}>
                     {genre.name}
                   </Link>
                 </div>
