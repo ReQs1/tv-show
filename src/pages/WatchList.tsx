@@ -11,7 +11,7 @@ function WatchList() {
       </div>
 
       {movies.length === 0 && (
-        <div className="flex items-center justify-center">
+        <div>
           <p>There are no movies in your Watch List</p>
         </div>
       )}

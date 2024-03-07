@@ -1,5 +1,11 @@
 import { useWatchlist } from "@/context/watchListContext";
-import { VideoType, fullMovieDetails, fullShowDetails } from "@/lib/types";
+import {
+  MovieType,
+  ShowType,
+  VideoType,
+  fullMovieDetails,
+  fullShowDetails,
+} from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { Minus, Play, Plus } from "lucide-react";
 import { useParams } from "react-router-dom";
@@ -22,8 +28,7 @@ function StatusButtons({ data }: Props) {
 
   const isStored =
     movies.find(
-      (movie: fullMovieDetails | fullShowDetails) =>
-        movie.uniqueId === `${data.id}-${type}`
+      (movie: ShowType | MovieType) => movie.uniqueId === `${data.id}-${type}`
     ) !== undefined;
 
   return (

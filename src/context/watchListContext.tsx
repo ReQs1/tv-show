@@ -1,4 +1,9 @@
-import { MovieType, ShowType } from "@/lib/types";
+import {
+  MovieType,
+  ShowType,
+  fullMovieDetails,
+  fullShowDetails,
+} from "@/lib/types";
 import { useContext, useState, createContext } from "react";
 
 type Props = {
@@ -7,9 +12,12 @@ type Props = {
 
 type WatchListContextType = {
   movies: (ShowType | MovieType)[];
-  onAddToWatchList: (data: ShowType | MovieType, type: string) => void;
+  onAddToWatchList: (
+    data: fullMovieDetails | fullShowDetails,
+    type: string
+  ) => void;
   onRemoveFromWatchList: (
-    data: ShowType | MovieType,
+    data: ShowType | MovieType | fullMovieDetails | fullShowDetails,
     type: string | undefined
   ) => void;
 };
@@ -26,14 +34,17 @@ function WatchListProvider({ children }: Props) {
     return toWatchList ? JSON.parse(toWatchList) : [];
   });
 
-  const onAddToWatchList = (data: ShowType | MovieType, type: string) => {
+  const onAddToWatchList = (
+    data: fullMovieDetails | fullShowDetails,
+    type: string
+  ) => {
     const newMovies = [...movies, { ...data, uniqueId: `${data.id}-${type}` }];
     localStorage.setItem("toWatchList", JSON.stringify(newMovies));
     setMovies(newMovies);
   };
 
   const onRemoveFromWatchList = (
-    data: ShowType | MovieType,
+    data: ShowType | MovieType | fullMovieDetails | fullShowDetails,
     type: string | undefined
   ) => {
     if (type === undefined) return;
