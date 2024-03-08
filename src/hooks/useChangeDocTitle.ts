@@ -3,10 +3,10 @@ import { useEffect } from "react";
 function useChangeDocTitle(data: any) {
   useEffect(() => {
     if (data) {
-      document.title = `${data.name || data.title} - ScreenSaga`;
+      document.title = `${data.name || data.title} - TV-Show`;
     }
     return () => {
-      document.title = "ScreenSaga";
+      document.title = "TV-Show";
     };
   }, [data]);
 }
