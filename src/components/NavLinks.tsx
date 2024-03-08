@@ -37,10 +37,7 @@ function NavLinks({ setIsOpen }: NavigationProps) {
         >
           <button
             className="flex items-center gap-1 cursor-pointer"
-            onClick={() => {
-              console.log("clicked");
-              setIsGenresOpen((isOpen) => !isOpen);
-            }}
+            onClick={() => setIsGenresOpen((isOpen) => !isOpen)}
           >
             Genres
             {isGenresOpen ? <ChevronUp size={26} /> : <ChevronDown size={26} />}

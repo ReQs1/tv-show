@@ -1,3 +1,4 @@
+import React from "react";
 import { motion } from "framer-motion";
 import { X } from "lucide-react";
 
@@ -5,7 +6,6 @@ import Logo from "./Logo";
 import NavLinks from "./NavLinks";
 
 import { useOutsideClick } from "../hooks/useOutsideClick";
-import React from "react";
 
 type Props = {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
