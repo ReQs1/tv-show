@@ -12,6 +12,7 @@ function Navbar() {
     location.pathname === "/movie" ||
     location.pathname.includes("/search") ||
     location.pathname.includes("/genres/");
+
   return (
     <header>
       <nav

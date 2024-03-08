@@ -5,6 +5,7 @@ import Logo from "./Logo";
 import NavLinks from "./NavLinks";
 
 import { useOutsideClick } from "../hooks/useOutsideClick";
+import React from "react";
 
 type Props = {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -20,7 +21,7 @@ function MobileNavbar({ setIsOpen }: Props) {
       initial={{ x: 500 }}
       animate={{ x: 0 }}
       exit={{ x: 500 }}
-      ref={ref}
+      ref={ref as React.RefObject<HTMLDivElement>}
     >
       <button
         className="absolute right-4 top-6 md:right-12"
