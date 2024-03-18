@@ -38,6 +38,7 @@ function SearchInput({ setIsOpen }: Props) {
           </svg>
         </label>
         <input
+          autoComplete="off"
           id="search_input"
           type="text"
           className="py-1 text-xl bg-transparent outline-none placeholder:text-stone-600"
